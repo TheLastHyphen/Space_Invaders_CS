@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://ckgve84q2s5mi"]
+
+[ext_resource type="Script" uid="uid://r7l4rnkkygdp" path="res://Scenes/Game/Game.cs" id="1_rdw05"]
+[ext_resource type="PackedScene" uid="uid://boijjbluuuqt1" path="res://Scenes/InvaderCrab/InvaderCrab.tscn" id="2_gwu2e"]
+[ext_resource type="PackedScene" uid="uid://b2o8d3556famn" path="res://Scenes/InvaderSquid/InvaderSquid.tscn" id="3_xbxml"]
+[ext_resource type="PackedScene" uid="uid://dw3fka6f0ruho" path="res://Scenes/InvaderOctopus/InvaderOctopus.tscn" id="4_ln2h6"]
+
+[node name="Game" type="Node" unique_id=1612122662]
+script = ExtResource("1_rdw05")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=37262986]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=2038276241]
+layout_mode = 2
+text = "This is going to be the game."
+
+[node name="InvaderCrab" parent="." unique_id=47765431 instance=ExtResource("2_gwu2e")]
+position = Vector2(515, 366)
+
+[node name="InvaderSquid" parent="." unique_id=1657113657 instance=ExtResource("3_xbxml")]
+position = Vector2(584, 366)
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=1958528283]
+
+[node name="InvaderOctopus" parent="." unique_id=633685619 instance=ExtResource("4_ln2h6")]
+position = Vector2(649, 362)

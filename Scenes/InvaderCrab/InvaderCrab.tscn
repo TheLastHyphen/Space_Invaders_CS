@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://boijjbluuuqt1"]
+
+[ext_resource type="Script" uid="uid://cukchsxktk4s5" path="res://Scenes/InvaderCrab/InvaderCrab.cs" id="1_awpnw"]
+[ext_resource type="Texture2D" uid="uid://c1n17xpw564c2" path="res://Scenes/InvaderCrab/Crab64x23.png" id="1_ulnuw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awpnw"]
+atlas = ExtResource("1_ulnuw")
+region = Rect2(0, 0, 32, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n14l"]
+atlas = ExtResource("1_ulnuw")
+region = Rect2(33, 0, 32, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13qdw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awpnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n14l")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(32, 22)
+
+[node name="InvaderCrab" type="Area2D" unique_id=47765431]
+script = ExtResource("1_awpnw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=802952830]
+sprite_frames = SubResource("SpriteFrames_13qdw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1138445941]
+shape = SubResource("RectangleShape2D_xrivr")

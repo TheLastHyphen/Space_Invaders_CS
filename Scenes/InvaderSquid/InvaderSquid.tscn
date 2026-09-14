@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://b2o8d3556famn"]
+
+[ext_resource type="Texture2D" uid="uid://bjkv6ymnpjlmp" path="res://Scenes/InvaderSquid/Squid65x24.png" id="1_8b5vt"]
+[ext_resource type="Script" uid="uid://ilhm5ynopocs" path="res://Scenes/InvaderSquid/InvaderSquid.cs" id="1_lbdod"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbdod"]
+atlas = ExtResource("1_8b5vt")
+region = Rect2(0, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f4ai"]
+atlas = ExtResource("1_8b5vt")
+region = Rect2(27, 0, 26, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13qdw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbdod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f4ai")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(26, 22)
+
+[node name="InvaderSquid" type="Area2D" unique_id=1657113657]
+script = ExtResource("1_lbdod")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1743958503]
+sprite_frames = SubResource("SpriteFrames_13qdw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=428018341]
+shape = SubResource("RectangleShape2D_xrivr")

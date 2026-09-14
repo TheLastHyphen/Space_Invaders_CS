@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://bn7pprfsav31e"]
+
+[ext_resource type="FontFile" uid="uid://8mjke3wsxh5" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="1_jmd48"]
+[ext_resource type="Script" uid="uid://c0bp17fbcl2c6" path="res://Scenes/MainUI/MainUi.cs" id="1_y2plt"]
+[ext_resource type="Texture2D" uid="uid://q0me65o2auxg" path="res://Assets/SpaceShip/MotherShip.png" id="3_5kk5n"]
+[ext_resource type="Texture2D" uid="uid://be12t8l3xsltx" path="res://Assets/InvaderSquid/Squid_Single.png" id="4_6hswp"]
+[ext_resource type="Texture2D" uid="uid://v8cw56ippvvk" path="res://Scenes/InvaderCrab/crab_single.png" id="5_fg6fm"]
+[ext_resource type="Texture2D" uid="uid://dmvyyoogy64jr" path="res://Assets/InvaderOctopus/Octopus_Single.png" id="6_tbou2"]
+
+[node name="MainUI" type="Control" unique_id=231858676]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y2plt")
+
+[node name="PlayLabel" type="Label" parent="." unique_id=826769327]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 132.0
+offset_right = 624.0
+offset_bottom = 156.0
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_jmd48")
+theme_override_font_sizes/font_size = 24
+text = "PLAY"
+
+[node name="ScoreAdvLabel" type="Label" parent="." unique_id=265877927]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -65.0
+offset_right = 252.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_jmd48")
+theme_override_font_sizes/font_size = 24
+text = "*SCORE ADVANCE TABLE*"
+
+[node name="StartGameLabel" type="Label" parent="." unique_id=1959622291]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -48.0
+offset_right = 300.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_jmd48")
+theme_override_font_sizes/font_size = 24
+text = "PRESS 1 TO START THE GAME"
+
+[node name="SpaceInvHBox" type="HBoxContainer" parent="." unique_id=1773172772]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -160.0
+offset_right = 169.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="SpaceLabel" type="Label" parent="SpaceInvHBox" unique_id=1659908305]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jmd48")
+theme_override_font_sizes/font_size = 24
+text = "SPACE"
+
+[node name="InvaderLabel" type="Label" parent="SpaceInvHBox" unique_id=1350795130]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_jmd48")
+theme_override_font_sizes/font_size = 24
+text = "INVADERS"
+
+[node name="ScoreTableVBox" type="VBoxContainer" parent="." unique_id=1178650287]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -22.0
+offset_right = -124.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="SpaceShip" type="TextureRect" parent="ScoreTableVBox" unique_id=1563358552]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("3_5kk5n")
+
+[node name="mysteryTextLabel" type="Label" parent="ScoreTableVBox/SpaceShip" unique_id=1421690966]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_top = -17.0
+offset_right = 356.0
+offset_bottom = -1.0
+grow_vertical = 0
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_jmd48")
+text = "= ? MYSTERY POINTS"
+
+[node name="Squid" type="TextureRect" parent="ScoreTableVBox" unique_id=935574749]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_6hswp")
+
+[node name="SquidTextLabel" type="Label" parent="ScoreTableVBox/Squid" unique_id=1331956821]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = -16.0
+offset_right = 230.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_jmd48")
+text = "= 30 POINTS"
+
+[node name="Crab" type="TextureRect" parent="ScoreTableVBox" unique_id=734483550]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_fg6fm")
+
+[node name="CrabTextLabel" type="Label" parent="ScoreTableVBox/Crab" unique_id=1783060874]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 57.0
+offset_top = -16.0
+offset_right = 233.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_jmd48")
+text = "= 20 POINTS"
+
+[node name="Octopus" type="TextureRect" parent="ScoreTableVBox" unique_id=2072616043]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_tbou2")
+
+[node name="OctopusTextLabel" type="Label" parent="ScoreTableVBox/Octopus" unique_id=932346498]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 57.0
+offset_top = -20.0
+offset_right = 233.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_jmd48")
+text = "= 10 POINTS"

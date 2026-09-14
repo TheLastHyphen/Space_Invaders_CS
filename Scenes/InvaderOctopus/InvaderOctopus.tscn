@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dw3fka6f0ruho"]
+
+[ext_resource type="Script" uid="uid://bpdlsbqns42xp" path="res://Scenes/InvaderOctopus/InvaderOctopus.cs" id="1_d6b1k"]
+[ext_resource type="Texture2D" uid="uid://deu3nx516ewik" path="res://Scenes/InvaderOctopus/Octopus65x24.png" id="1_ilr1t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6b1k"]
+atlas = ExtResource("1_ilr1t")
+region = Rect2(0, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmbo0"]
+atlas = ExtResource("1_ilr1t")
+region = Rect2(33, 0, 32, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13qdw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6b1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmbo0")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(32, 22)
+
+[node name="InvaderOctopus" type="Area2D" unique_id=633685619]
+script = ExtResource("1_d6b1k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1784979102]
+sprite_frames = SubResource("SpriteFrames_13qdw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=619612308]
+shape = SubResource("RectangleShape2D_xrivr")
