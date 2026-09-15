@@ -1,9 +1,0 @@
-VBoxContainer
-Label
-Control
-HBoxContainer
-Timer
-Panel
-CenterContainer
-TextureRect
-Sprite2D
