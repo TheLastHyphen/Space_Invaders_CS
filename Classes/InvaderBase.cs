@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public abstract partial class InvaderBase : Node2D
@@ -8,9 +7,9 @@ public abstract partial class InvaderBase : Node2D
 	private bool _canMove = true;
 	private bool _frame = true;
 
-	public abstract int InvaderPoints { get; }
-	public abstract String InvaderName { get; }
-	public abstract AnimatedSprite2D AnimatedSprite { get; }
+	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+	public abstract int Points { get; }
+	public abstract string Name { get; }	
 
 	public override void _Ready()
 	{
@@ -23,11 +22,6 @@ public abstract partial class InvaderBase : Node2D
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut -= OnMoveUpdate;
 	}
 
-	public override void _Process(double delta)
-	{
-		
-	}
-
 	private void Move()
 	{
 		if(_canMove)
@@ -35,11 +29,11 @@ public abstract partial class InvaderBase : Node2D
 			Position = new Vector2(Position.X + 15 * _direction, Position.Y);
 			if(_frame)
 			{
-				AnimatedSprite.Frame = 1;
+				InvAnimatedSprite.Frame = 1;
 			}
 			else
 			{
-				AnimatedSprite.Frame = 0;
+				InvAnimatedSprite.Frame = 0;
 			}
 			_frame = !_frame;
 		}

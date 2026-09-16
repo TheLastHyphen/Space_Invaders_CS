@@ -1,12 +1,9 @@
 using Godot;
-using System;
 
 public partial class InvaderOctopus : InvaderBase
 {
-	public override int InvaderPoints => 30;
-
-	public override string InvaderName => "I am Invader Squid";
-	public override AnimatedSprite2D AnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+	public override int Points => 30;
+	public override string Name => "I and Invader Octopus";
 
 	public override void _Ready()
 	{

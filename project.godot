@@ -20,6 +20,7 @@ config/icon="uid://cy8qa1miwcjim"
 SceneManager="*uid://h8dcuweeug6s"
 SignalBroadCaster="*uid://ok05vru0esfk"
 ScoreDisplay="*uid://b571hwfkk0djm"
+InvaderResource="*uid://cq46o2i4a3bsf"
 
 [display]
 
