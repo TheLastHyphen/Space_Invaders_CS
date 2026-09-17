@@ -12,6 +12,7 @@ public partial class PackedScenes : Node
 	public PackedScene Player = ResourceLoader.Load<PackedScene>("res://Scenes/Player/Player.tscn");
 	public PackedScene Game = ResourceLoader.Load<PackedScene>("res://Scenes/Game/Game.tscn");
 	public PackedScene MainUI = ResourceLoader.Load<PackedScene>("res://Scenes/MainUI/MainUi.tscn");
+	public PackedScene PlayerMissile = ResourceLoader.Load<PackedScene>("res://Scenes/PlayerMissile/PlayerMissile.tscn");
 	
 	public override void _Ready()
 	{
