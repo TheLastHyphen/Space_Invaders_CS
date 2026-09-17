@@ -71,4 +71,9 @@ public partial class Game : Node
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
 	}
+
+	public void OnLeftBoundary_AreaEntered(Area2D area)
+	{
+		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
+	}
 }
