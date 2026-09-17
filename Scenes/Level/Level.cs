@@ -14,7 +14,8 @@ public partial class Level : Node2D
 {
 	private InvaderSquid _squid;
 
-	const int InvadersInRow = 20;
+	[Export]
+	int InvadersInRow { get; set; } = 200;
 	const float InvaderXSpacing = 50.0f;
 	const float InvaderYSpacing = 50.0f;
 	private Vector2 row1StartPosition => new(33,90);
@@ -34,11 +35,11 @@ public partial class Level : Node2D
 	public async Task SetupInvaders()
 	{
 		_totalInvaders = 0;
-		await SetUpRow(InvaderResource.Instance.InvaderSquid, row1StartPosition, Colors.White);
-		await SetUpRow(InvaderResource.Instance.InvaderCrab, row2StartPosition, Colors.White);
-		await SetUpRow(InvaderResource.Instance.InvaderCrab, row3StartPosition, Colors.White);
-		await SetUpRow(InvaderResource.Instance.InvaderOctopus, row4StartPosition, Colors.White);
-		await SetUpRow(InvaderResource.Instance.InvaderOctopus, row5StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderSquid, row1StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderCrab, row2StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderCrab, row3StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderOctopus, row4StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderOctopus, row5StartPosition, Colors.White);
 		SignalBroadCaster.Instance.EmitOnFinishedDrawingInvaders();
 	}
 
