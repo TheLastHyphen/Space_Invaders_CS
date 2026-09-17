@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract partial class InvaderBase : Node2D
+public abstract partial class InvaderBase : Area2D
 {
 	private int _direction = 1;
 	private bool _droppingDown = false;
@@ -9,11 +9,12 @@ public abstract partial class InvaderBase : Node2D
 
 	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	public abstract int Points { get; }
-	public abstract string Name { get; }	
+	public abstract string InvaderName { get; }	
 
 	public override void _Ready()
 	{
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut += OnMoveUpdate;
+		SignalBroadCaster.Instance.OnEdgeOfScreen += OnEdgeOfScreen;
 	}
 
 	public override void _ExitTree()
@@ -52,4 +53,15 @@ public abstract partial class InvaderBase : Node2D
 			_droppingDown = false;
 		}
 	}
+
+	public void OnEdgeOfScreen()
+	{
+		_droppingDown = true;
+	}
+
+	// public void OnAreaEntered(Area2D area)
+	// {
+	// 	GD.Print("Invaderbase: ", area.Name);
+	// 	_droppingDown = true;
+	// }
 }
