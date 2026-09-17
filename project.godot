@@ -61,6 +61,7 @@ IncScore={
 2d_physics/layer_2="CeilingBoundary"
 2d_physics/layer_3="LeftBoundary"
 2d_physics/layer_4="RightBoundary"
+2d_physics/layer_5="Invader"
 
 [physics]
 
