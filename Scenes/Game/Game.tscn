@@ -36,7 +36,7 @@ shape = SubResource("WorldBoundaryShape2D_13qdw")
 position = Vector2(54, 0)
 rotation = 1.5707964
 collision_layer = 4
-collision_mask = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1710958922]
 shape = SubResource("WorldBoundaryShape2D_b1lj4")
@@ -75,4 +75,5 @@ theme_override_fonts/font = ExtResource("2_gwu2e")
 theme_override_font_sizes/font_size = 16
 text = "0000"
 
+[connection signal="area_entered" from="LeftBoundary" to="." method="OnLeftBoundary_AreaEntered"]
 [connection signal="area_entered" from="RightBoundary" to="." method="OnRightBoundary_AreaEntered"]
