@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://oyibtv44r30p"]
+
+[ext_resource type="Script" uid="uid://ckbmcd6oi88wq" path="res://Scenes/PlayerMissile/PlayerMissile.cs" id="1_5vihf"]
+[ext_resource type="Texture2D" uid="uid://clklitlgi2pd" path="res://Assets/PlayerMissile/bullet.png" id="1_dosfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(2, 8)
+
+[node name="PlayerMissile" type="Area2D" unique_id=1045818531]
+collision_layer = 64
+collision_mask = 18
+script = ExtResource("1_5vihf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183460374]
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1807614534]
+scale = Vector2(0.1, 0.25)
+texture = ExtResource("1_dosfl")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
