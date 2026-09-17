@@ -65,15 +65,11 @@ public partial class Game : Node
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
 	}
 
-	/// <summary>
-	/// Signal raised by RightBoundary when an Invader enters its area
-	/// </summary>
-	/// <param name="area"></param>
 	public void OnRightBoundary_AreaEntered(Area2D area)
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
 	}
-	
+
 	public void OnLeftBoundary_AreaEntered(Area2D area)
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
