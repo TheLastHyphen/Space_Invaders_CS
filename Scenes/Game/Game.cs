@@ -3,12 +3,8 @@ using Godot;
 
 public partial class Game : Node
 {
-
-	private PackedScene level = ResourceLoader.Load<PackedScene>("res://Scenes/Level/Level.tscn");
 	private Timer moveTimer = null;
-
 	private Label _numberOfInvadersLabel = null;
-
 	private Area2D _rightBoundary;
 
 	public override void _UnhandledInput(InputEvent inputEvent)
@@ -33,13 +29,18 @@ public partial class Game : Node
 		_rightBoundary = GetNode<Area2D>("RightBoundary");
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
-		Level lev = level.Instantiate<Level>();
+		Level lev = PackedScenes.Instance.level.Instantiate<Level>();
 		lev.Position = new Vector2(100, 100);
 		AddChild(lev);
 		RenderingServer.SetDefaultClearColor(Colors.Black);
 		ScoreDisplay.Instance.ClearScore();
 		moveTimer = GetNode<Timer>("MoveTimer");
-		moveTimer.Timeout += OnMoveTimer_TimeOut;	
+		moveTimer.Timeout += OnMoveTimer_TimeOut;
+
+		// Create player
+		Player player = PackedScenes.Instance.Player.Instantiate<Player>();
+		player.Position = new Vector2(100, 100);
+		AddChild(player);
 	}
 
 	public void OnMoveTimer_TimeOut()
@@ -61,6 +62,7 @@ public partial class Game : Node
 	{
 		moveTimer.Timeout -= OnMoveTimer_TimeOut;
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
+		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
 	}
 
 	/// <summary>
@@ -71,7 +73,7 @@ public partial class Game : Node
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
 	}
-
+	
 	public void OnLeftBoundary_AreaEntered(Area2D area)
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
