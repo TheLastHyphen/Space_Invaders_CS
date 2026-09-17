@@ -29,6 +29,8 @@ animations = [{
 size = Vector2(26, 22)
 
 [node name="InvaderSquid" type="Area2D" unique_id=1657113657]
+collision_layer = 16
+collision_mask = 12
 script = ExtResource("1_lbdod")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1743958503]
