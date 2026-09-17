@@ -8,6 +8,7 @@ public partial class SignalBroadCaster : Node
 	public Action OnMoveTimerTimeOut;
 	public Action OnFinishedDrawingInvaders;
 	public Action<int> OnUpdateNumberOfInvaders;
+	public Action OnEdgeOfScreen;
 
 	public override void _Ready()
 	{
@@ -27,5 +28,10 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnUpdateNumberOfInvaders(int number)
 	{
 		OnUpdateNumberOfInvaders?.Invoke(number);
+	}
+
+	public void EmitOnEdgeOfScreen()
+	{
+		OnEdgeOfScreen?.Invoke();
 	}
 }
