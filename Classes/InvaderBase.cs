@@ -58,10 +58,4 @@ public abstract partial class InvaderBase : Area2D
 	{
 		_droppingDown = true;
 	}
-
-	// public void OnAreaEntered(Area2D area)
-	// {
-	// 	GD.Print("Invaderbase: ", area.Name);
-	// 	_droppingDown = true;
-	// }
 }
