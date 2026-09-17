@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
 public partial class Game : Node
@@ -7,6 +8,8 @@ public partial class Game : Node
 	private Timer moveTimer = null;
 
 	private Label _numberOfInvadersLabel = null;
+
+	private Area2D _rightBoundary;
 
 	public override void _UnhandledInput(InputEvent inputEvent)
 	{
@@ -27,6 +30,7 @@ public partial class Game : Node
 	public override void _Ready()
 	{
 		_numberOfInvadersLabel = GetNode<Label>("HBoxContainer/InvadersRemainLabel");
+		_rightBoundary = GetNode<Area2D>("RightBoundary");
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
 		Level lev = level.Instantiate<Level>();
@@ -57,5 +61,14 @@ public partial class Game : Node
 	{
 		moveTimer.Timeout -= OnMoveTimer_TimeOut;
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
+	}
+
+	/// <summary>
+	/// Signal raised by RightBoundary when an Invader enters its area
+	/// </summary>
+	/// <param name="area"></param>
+	public void OnRightBoundary_AreaEntered(Area2D area)
+	{
+		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
 	}
 }
