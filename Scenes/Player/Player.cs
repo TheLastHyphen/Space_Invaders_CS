@@ -1,4 +1,3 @@
-using System.Security.Principal;
 using Godot;
 
 public partial class Player : Area2D
@@ -10,6 +9,7 @@ public partial class Player : Area2D
 	private bool _canMoveLeft = true;
 	private bool _canFire = true;
 	private float _playerBaseWidth = 0.0f;
+	private Area2D missile = null;
 	
 	// for Demo
 	private bool _moveLeft = false;
@@ -22,11 +22,17 @@ public partial class Player : Area2D
 		base._Ready();
 		Position = _playerPosition;
 		_playerBaseWidth = GetNode<Sprite2D>("PlayerSprite").Texture.GetSize().X;
+		missile = PackedScenes.Instance.PlayerMissile.Instantiate<PlayerMissile>();
+		GetParent().AddChild(missile);
 	}
 
 	public override void _UnhandledInput(InputEvent inputEvent)
 	{
 		base._UnhandledInput(inputEvent);
+		if(inputEvent.IsActionPressed("PlayerFire"))
+		{
+			SignalBroadCaster.Instance.EmitOnPlayerFirePressed(Position);
+		}
 	}
 
 	public override void _Process(double delta)
