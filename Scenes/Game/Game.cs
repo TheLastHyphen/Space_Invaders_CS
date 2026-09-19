@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
 public partial class Game : Node2D
@@ -6,8 +5,11 @@ public partial class Game : Node2D
 	private Timer moveTimer = null;
 	private Label _numberOfInvadersLabel = null;
 	private Area2D _rightBoundary;
-
+	private Area2D _leftBoundary;
 	private Area2D invBomb = null;
+
+	public static float LeftBoundaryX { get; private set; }
+	public static float RightBoundaryX { get; private set; }
 
 	public override void _UnhandledInput(InputEvent inputEvent)
 	{
@@ -29,6 +31,9 @@ public partial class Game : Node2D
 	{
 		_numberOfInvadersLabel = GetNode<Label>("HBoxContainer/InvadersRemainLabel");
 		_rightBoundary = GetNode<Area2D>("RightBoundary");
+		RightBoundaryX = _rightBoundary.Position.X;
+		_leftBoundary = GetNode<Area2D>("LeftBoundary");
+		LeftBoundaryX = _leftBoundary.Position.X;
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
 		Level lev = PackedScenes.Instance.level.Instantiate<Level>();
