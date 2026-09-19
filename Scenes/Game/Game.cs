@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Godot;
 
-public partial class Game : Node
+public partial class Game : Node2D
 {
 	private Timer moveTimer = null;
 	private Label _numberOfInvadersLabel = null;
 	private Area2D _rightBoundary;
+
+	private Area2D invBomb = null;
 
 	public override void _UnhandledInput(InputEvent inputEvent)
 	{
@@ -35,7 +37,7 @@ public partial class Game : Node
 		RenderingServer.SetDefaultClearColor(Colors.Black);
 		ScoreDisplay.Instance.ClearScore();
 		moveTimer = GetNode<Timer>("MoveTimer");
-		moveTimer.Timeout += OnMoveTimer_TimeOut;
+		moveTimer.Timeout += OnMoveTimerTimeOut;
 
 		// Create player
 		Player player = PackedScenes.Instance.Player.Instantiate<Player>();
@@ -43,14 +45,29 @@ public partial class Game : Node
 		AddChild(player);
 	}
 
-	public void OnMoveTimer_TimeOut()
+	public override void _Draw()
+	{
+		base._Draw();
+		DrawLine(new Vector2(0, 600), new Vector2(1152, 600), Colors.Green, 5, false);
+	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+		if(GodotObject.IsInstanceValid(invBomb) == false)
+		{
+			invBomb = null;
+		}
+	}
+
+	public void OnMoveTimerTimeOut()
 	{
 		SignalBroadCaster.Instance.EmitOnMoveTimerTimeOut();
 	}
 
 	public void OnFinishedDrawingInvaders()
 	{
-		moveTimer.Start();
+		moveTimer?.Start();
 	}
 
 	private void OnUpdateNumberOfInvaders(int number)
@@ -60,7 +77,7 @@ public partial class Game : Node
 
 	public void TidyUp()
 	{
-		moveTimer.Timeout -= OnMoveTimer_TimeOut;
+		moveTimer.Timeout -= OnMoveTimerTimeOut;
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
 	}
