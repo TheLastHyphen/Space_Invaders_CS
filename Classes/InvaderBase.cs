@@ -50,11 +50,7 @@ public abstract partial class InvaderBase : Area2D
 		
 			if(DropBomb() == true)
 			{
-				GD.Print("Dropping a bomb");
-				uint index = GD.Randi() % 2;
-				InvaderBombBase invBomb = PackedScenes.Instance.InvaderBombs[index].Instantiate<InvaderBombBase>();
-				invBomb.Position = Position;
-				GetParent().AddChild(invBomb);
+				CreateInvaderBomb();
 			}
 		}
 		else
@@ -63,6 +59,15 @@ public abstract partial class InvaderBase : Area2D
 			_direction *= -1;
 			_droppingDown = false;
 		}
+	}
+
+	private void CreateInvaderBomb()
+	{
+		GD.Print("Dropping a bomb");
+		uint index = GD.Randi() % 2;
+		InvaderBombBase invBomb = PackedScenes.Instance.InvaderBombs[index].Instantiate<InvaderBombBase>();
+		invBomb.Position = Position;
+		GetParent().AddChild(invBomb);
 	}
 
 	public void OnEdgeOfScreen()
