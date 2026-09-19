@@ -79,6 +79,7 @@ PlayerFire={
 2d_physics/layer_5="Invader"
 2d_physics/layer_6="Player"
 2d_physics/layer_7="PlayerMissile"
+2d_physics/layer_8="InvaderBomb"
 
 [physics]
 
@@ -87,3 +88,4 @@ PlayerFire={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true

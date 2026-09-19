@@ -11,21 +11,21 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_njqwk"]
 
-[node name="Game" type="Node" unique_id=1612122662]
+[node name="Game" type="Node2D" unique_id=2013797914]
 script = ExtResource("1_rdw05")
 
 [node name="MoveTimer" type="Timer" parent="." unique_id=1958528283]
 
 [node name="FloorBoundary" type="Area2D" parent="." unique_id=582128255]
-position = Vector2(0, 590)
-collision_mask = 0
+position = Vector2(612, 589)
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorBoundary" unique_id=207449098]
 shape = SubResource("WorldBoundaryShape2D_xrivr")
 
 [node name="CeilingBoundary" type="Area2D" parent="." unique_id=1014562026]
 position = Vector2(0, 4)
-rotation = 3.1415927
+rotation = -3.1415925
 collision_layer = 2
 collision_mask = 0
 
@@ -43,7 +43,7 @@ shape = SubResource("WorldBoundaryShape2D_b1lj4")
 
 [node name="RightBoundary" type="Area2D" parent="." unique_id=198194881]
 position = Vector2(1098, 0)
-rotation = 4.712389
+rotation = -1.5707964
 collision_layer = 8
 collision_mask = 16
 
@@ -56,9 +56,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -415.0
-offset_top = -29.0
-offset_bottom = -13.0
+offset_left = 727.0
+offset_top = 618.0
+offset_right = 1142.0
+offset_bottom = 634.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 15
