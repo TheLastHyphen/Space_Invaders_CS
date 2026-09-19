@@ -6,10 +6,11 @@ public abstract partial class InvaderBase : Area2D
 	private bool _droppingDown = false;
 	private bool _canMove = true;
 	private bool _frame = true;
-
+	
 	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	public abstract int Points { get; }
-	public abstract string InvaderName { get; }	
+	public abstract string InvaderName { get; }
+	public abstract float BombDropChance { get; }
 
 	public override void _Ready()
 	{
@@ -21,6 +22,7 @@ public abstract partial class InvaderBase : Area2D
 	{
 		base._ExitTree();
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut -= OnMoveUpdate;
+		SignalBroadCaster.Instance.OnEdgeOfScreen -= OnEdgeOfScreen;
 	}
 
 	private void Move()
@@ -45,6 +47,15 @@ public abstract partial class InvaderBase : Area2D
 		if(_droppingDown == false)
 		{
 			Move();
+		
+			if(DropBomb() == true)
+			{
+				GD.Print("Dropping a bomb");
+				uint index = GD.Randi() % 2;
+				InvaderBombBase invBomb = PackedScenes.Instance.InvaderBombs[index].Instantiate<InvaderBombBase>();
+				invBomb.Position = Position;
+				GetParent().AddChild(invBomb);
+			}
 		}
 		else
 		{
@@ -57,5 +68,18 @@ public abstract partial class InvaderBase : Area2D
 	public void OnEdgeOfScreen()
 	{
 		_droppingDown = true;
+	}
+
+	private bool DropBomb()
+	{
+		if(RandomFloatZeroToOne() <= BombDropChance) return true;
+		return false;
+	}
+
+	private float RandomFloatZeroToOne()
+	{
+		float num = GD.Randf();
+		GD.Print("bomb chance: ", num);
+		return num;
 	}
 }
