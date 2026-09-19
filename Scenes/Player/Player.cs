@@ -5,8 +5,6 @@ public partial class Player : Area2D
 	private Vector2 _playerPosition = new Vector2(238,558);
 	private float playerSpeed = 500.0f;
 	private bool _canMove = true;
-	private bool _canMoveRight = true;
-	private bool _canMoveLeft = true;
 	private bool _canFire = true;
 	private float _playerBaseWidth = 0.0f;
 	private Area2D missile = null;
@@ -22,48 +20,34 @@ public partial class Player : Area2D
 		base._Ready();
 		Position = _playerPosition;
 		_playerBaseWidth = GetNode<Sprite2D>("PlayerSprite").Texture.GetSize().X;
-		missile = PackedScenes.Instance.PlayerMissile.Instantiate<PlayerMissile>();
-		GetParent().AddChild(missile);
 	}
 
 	public override void _UnhandledInput(InputEvent inputEvent)
 	{
 		base._UnhandledInput(inputEvent);
-		if(inputEvent.IsActionPressed("PlayerFire"))
+		if(inputEvent.IsActionPressed("PlayerFire") && GodotObject.IsInstanceValid(missile) == false)
 		{
-			SignalBroadCaster.Instance.EmitOnPlayerFirePressed(Position);
+			missile = PackedScenes.Instance.PlayerMissile.Instantiate<PlayerMissile>();
+			missile.Position = Position;
+			GetParent().AddChild(missile);
 		}
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		
-		float dir = Input.GetAxis("PlayerLeft", "PlayerRight");
 		Vector2 pos = Position;
+		float dir = Input.GetAxis("PlayerLeft", "PlayerRight");
 		pos.X += dir * (float)delta * playerSpeed;
 
-		if(Input.IsActionPressed("PlayerLeft") && _canMoveLeft)
+		if(pos.X >= Game.RightBoundaryX)
 		{
-			Position = pos;
+			pos.X = Game.RightBoundaryX;
 		}
-		else if(Input.IsActionPressed("PlayerRight") && _canMoveRight)
+		else if(pos.X <= Game.LeftBoundaryX)
 		{
-			Position = pos;
+			pos.X = Game.LeftBoundaryX;
 		}
-	}
-
-	public void OnAreaEntered(Area2D area)
-	{
-		if(area.Name == "RightBoundary")
-		{
-			 _canMoveRight = false;
-			_canMoveLeft = true;
-		}
-		else if(area.Name == "LeftBoundary")
-		{
-			_canMoveLeft = false;
-			_canMoveRight = true;
-		}
+		Position = pos;
 	}
 }
