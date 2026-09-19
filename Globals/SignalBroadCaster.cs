@@ -9,7 +9,6 @@ public partial class SignalBroadCaster : Node
 	public Action OnFinishedDrawingInvaders;
 	public Action<int> OnUpdateNumberOfInvaders;
 	public Action OnEdgeOfScreen;
-	public Action<Vector2> OnPlayerFirePressed;
 
 	public override void _Ready()
 	{
@@ -34,10 +33,5 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnEdgeOfScreen()
 	{
 		OnEdgeOfScreen?.Invoke();
-	}
-
-	public void EmitOnPlayerFirePressed(Vector2 position)
-	{
-		OnPlayerFirePressed?.Invoke(position);
 	}
 }
