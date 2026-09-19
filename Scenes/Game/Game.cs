@@ -32,7 +32,7 @@ public partial class Game : Node2D
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
 		Level lev = PackedScenes.Instance.level.Instantiate<Level>();
-		lev.Position = new Vector2(100, 100);
+		lev.Position = new Vector2(50, 50);
 		AddChild(lev);
 		RenderingServer.SetDefaultClearColor(Colors.Black);
 		ScoreDisplay.Instance.ClearScore();

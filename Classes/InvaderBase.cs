@@ -1,3 +1,6 @@
+using System.ComponentModel;
+using System.Reflection;
+using System.Threading.Tasks;
 using Godot;
 
 public abstract partial class InvaderBase : Area2D
@@ -6,7 +9,9 @@ public abstract partial class InvaderBase : Area2D
 	private bool _droppingDown = false;
 	private bool _canMove = true;
 	private bool _frame = true;
-	
+	private bool _canDropBomb = false;
+	private InvaderBombBase invBomb = null;
+			
 	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	public abstract int Points { get; }
 	public abstract string InvaderName { get; }
@@ -44,11 +49,12 @@ public abstract partial class InvaderBase : Area2D
 
 	private void OnMoveUpdate()
 	{
+		//_canDropBomb = false;
 		if(_droppingDown == false)
 		{
 			Move();
 		
-			if(DropBomb() == true)
+			if(DropBomb() == true)// && GodotObject.IsInstanceValid(invBomb) == false)
 			{
 				CreateInvaderBomb();
 			}
@@ -63,9 +69,7 @@ public abstract partial class InvaderBase : Area2D
 
 	private void CreateInvaderBomb()
 	{
-		GD.Print("Dropping a bomb");
-		uint index = GD.Randi() % 2;
-		InvaderBombBase invBomb = PackedScenes.Instance.InvaderBombs[index].Instantiate<InvaderBombBase>();
+		invBomb = PackedScenes.Instance.InvaderBombs[GD.Randi() % 2].Instantiate<InvaderBombBase>();
 		invBomb.Position = Position;
 		GetParent().AddChild(invBomb);
 	}
@@ -83,8 +87,6 @@ public abstract partial class InvaderBase : Area2D
 
 	private float RandomFloatZeroToOne()
 	{
-		float num = GD.Randf();
-		GD.Print("bomb chance: ", num);
-		return num;
+		return GD.Randf();
 	}
 }

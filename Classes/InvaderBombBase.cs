@@ -8,7 +8,7 @@ public abstract partial class InvaderBombBase : Area2D
 	
 	public override void _Ready()
 	{
-		_speed = (int)GD.RandRange(75.0f, 600.0f);
+		_speed = (int)GD.RandRange(75.0f, 400.0f);
 	}
 
 	public override void _Process(double delta)
@@ -22,17 +22,14 @@ public abstract partial class InvaderBombBase : Area2D
 	{
 		if(area.Name == "FloorBoundary")
 		{
-			GD.Print("Hit Floor");
 			QueueFree();
 		}
 		else if(area.Name == "Player")
 		{
-			GD.Print("Hit player");
 			QueueFree();
 		}
 		else if(area.Name == "PlayerMissile")
 		{
-			GD.Print("Hit missile");
 			QueueFree();
 		}
 	}
