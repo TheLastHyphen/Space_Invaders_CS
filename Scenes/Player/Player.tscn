@@ -18,5 +18,3 @@ shape = SubResource("RectangleShape2D_xrivr")
 [node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1412292355]
 scale = Vector2(2, 2)
 texture = ExtResource("1_s0eop")
-
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
