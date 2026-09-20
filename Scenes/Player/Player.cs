@@ -57,4 +57,9 @@ public partial class Player : Area2D
 	{
 		_canFire = true;
 	}
+
+	public void OnAreaEntered(Area2D area)
+	{
+		SignalBroadCaster.Instance.EmitOnPlayerHit();
+	}
 }
