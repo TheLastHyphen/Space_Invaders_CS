@@ -27,15 +27,5 @@ public partial class PlayerMissile : Area2D
 	public void OnAreaEntered(Area2D area)
 	{
 		QueueFree();
-
-		// if(area.Name == "CeilingBoundary")
-		// {
-		// 	QueueFree();
-		// }
-		// else
-		// {
-		// 	area.QueueFree();
-		// 	QueueFree();
-		// }
 	}
 }
