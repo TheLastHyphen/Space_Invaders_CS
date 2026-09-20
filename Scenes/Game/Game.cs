@@ -82,14 +82,6 @@ public partial class Game : Node2D
 		_numberOfInvadersLabel.Text = number.ToString();
 	}
 
-	// public void TidyUp()
-	// {
-	// 	moveTimer.Timeout -= OnMoveTimerTimeOut;
-	// 	SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
-	// 	SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
-	// 	SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
-	// }
-
 	public void OnRightBoundary_AreaEntered(Area2D area)
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
