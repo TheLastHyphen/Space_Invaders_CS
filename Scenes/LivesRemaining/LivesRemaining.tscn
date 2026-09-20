@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dqkbkwed158gi"]
+
+[ext_resource type="Texture2D" uid="uid://baqc8aqqba7m1" path="res://Assets/Player/PlayerBase.png" id="1_72crs"]
+[ext_resource type="Script" uid="uid://ctqctmj2buryb" path="res://Scenes/LivesRemaining/LivesRemaining.cs" id="1_wjaxa"]
+[ext_resource type="FontFile" uid="uid://8mjke3wsxh5" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="3_237yy"]
+
+[node name="LivesRemaining" type="Node2D" unique_id=95189323]
+script = ExtResource("1_wjaxa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=761672080]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 80.0
+offset_bottom = 16.0
+grow_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="LivesLabel" type="Label" parent="HBoxContainer" unique_id=805064622]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_237yy")
+theme_override_font_sizes/font_size = 16
+text = "3"
+
+[node name="Life2" type="TextureRect" parent="HBoxContainer" unique_id=1090261338]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -2)
+texture = ExtResource("1_72crs")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Life1" type="TextureRect" parent="HBoxContainer" unique_id=200544581]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -2)
+texture = ExtResource("1_72crs")
+expand_mode = 3
+stretch_mode = 4
