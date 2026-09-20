@@ -21,6 +21,7 @@ public abstract partial class InvaderBase : Area2D
 	{
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut += OnMoveUpdate;
 		SignalBroadCaster.Instance.OnEdgeOfScreen += OnEdgeOfScreen;
+		this.AreaEntered += OnAreaEntered;
 	}
 
 	public override void _ExitTree()
@@ -88,5 +89,14 @@ public abstract partial class InvaderBase : Area2D
 	private float RandomFloatZeroToOne()
 	{
 		return GD.Randf();
+	}
+
+	private void OnAreaEntered(Area2D area)
+	{
+		if(area.Name == "PlayerMissile")
+		{
+			ScoreDisplay.Instance.UpdateScore(Points);
+			QueueFree();
+		}
 	}
 }
