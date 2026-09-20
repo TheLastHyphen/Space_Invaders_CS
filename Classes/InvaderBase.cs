@@ -96,6 +96,7 @@ public abstract partial class InvaderBase : Area2D
 		if(area.Name == "PlayerMissile")
 		{
 			ScoreDisplay.Instance.UpdateScore(Points);
+			SignalBroadCaster.Instance.OnInvaderHit();
 			QueueFree();
 		}
 	}
