@@ -4,4 +4,4 @@
 
 [node name="Level" type="Node2D" unique_id=1638020743]
 script = ExtResource("1_vbawi")
-InvadersInRow = 20
+InvadersInRow = 5

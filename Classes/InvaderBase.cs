@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.Reflection;
-using System.Threading.Tasks;
 using Godot;
 
 public abstract partial class InvaderBase : Area2D

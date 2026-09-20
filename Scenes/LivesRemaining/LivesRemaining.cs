@@ -7,6 +7,12 @@ public partial class LivesRemaining : Node2D
 	private int _remainingLives = 3;
 	private Label _liveLabel;
 
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		SignalBroadCaster.Instance.OnPlayerHit -= OnAreaEntered;
+	}
+
 	public override void _Ready()
 	{
 		_life1 = GetNode<TextureRect>("HBoxContainer/Life1");
