@@ -21,10 +21,10 @@ public partial class Game : Node2D
 			SceneManager.Instance.LoadMainUIScene();
 		}
 
-		if(inputEvent.IsActionPressed("IncScore") == true)
-		{
-			ScoreDisplay.Instance.UpdateScore(20);
-		}
+		// if(inputEvent.IsActionPressed("IncScore") == true)
+		// {
+		// 	ScoreDisplay.Instance.UpdateScore(20);
+		// }
 	}
 
 	public override void _Ready()
@@ -73,6 +73,7 @@ public partial class Game : Node2D
 	public void OnFinishedDrawingInvaders()
 	{
 		moveTimer?.Start();
+		SignalBroadCaster.Instance.EmitOnCanFireMissile();
 	}
 
 	private void OnUpdateNumberOfInvaders(int number)
