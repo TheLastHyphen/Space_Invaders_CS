@@ -22,17 +22,10 @@ public abstract partial class InvaderBombBase : Area2D
 
 	public void OnAreaEntered(Area2D area)
 	{
-		if(area.Name == "FloorBoundary")
+		if(area.Name == "PlayerMissile")
 		{
-			QueueFree();
+			ScoreDisplay.Instance.UpdateScore(Points);
 		}
-		else if(area.Name == "Player")
-		{
-			QueueFree();
-		}
-		else if(area.Name == "PlayerMissile")
-		{
-			QueueFree();
-		}
+		QueueFree();
 	}
 }
