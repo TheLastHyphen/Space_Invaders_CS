@@ -87,7 +87,7 @@ public partial class MainUi : Control
 		WaitDrawChar(_startGameLabel, 0.1f, StartGameText);
 		await WaitDrawChar(_mysteryPointsLabel, charDelay, MysteryPointsText);
 		await WaitDrawChar(_squidPointsLabel, charDelay, SquidPointsText);
-		await WaitDrawChar(_crabPointsLabel, charDelay, SquidPointsText);
+		await WaitDrawChar(_crabPointsLabel, charDelay, CrabPointsText);
 		await WaitDrawChar(_octopusPointsLabel, charDelay, OctopusPointsText);
 	}
 
