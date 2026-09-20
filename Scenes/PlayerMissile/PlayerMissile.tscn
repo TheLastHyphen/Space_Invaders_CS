@@ -4,14 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://clklitlgi2pd" path="res://Assets/PlayerMissile/bullet.png" id="1_dosfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
-size = Vector2(2, 8)
+size = Vector2(1.3333334, 8)
 
 [node name="PlayerMissile" type="Area2D" unique_id=1045818531]
+scale = Vector2(1.5, 1.5)
 collision_layer = 64
-collision_mask = 18
+collision_mask = 146
 script = ExtResource("1_5vihf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=183460374]
+position = Vector2(-2.9802322e-08, 0)
 shape = SubResource("RectangleShape2D_xrivr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1807614534]
