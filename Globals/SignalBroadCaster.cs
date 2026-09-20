@@ -10,6 +10,7 @@ public partial class SignalBroadCaster : Node
 	public Action<int> OnUpdateNumberOfInvaders;
 	public Action OnEdgeOfScreen;
 	public Action OnCanFireMissile;
+	public Action OnInvaderHit;
 
 	public override void _Ready()
 	{
@@ -39,5 +40,10 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnCanFireMissile()
 	{
 		OnCanFireMissile?.Invoke();
+	}
+
+	public void EmitOnInvaderHit()
+	{
+		OnInvaderHit?.Invoke();
 	}
 }
