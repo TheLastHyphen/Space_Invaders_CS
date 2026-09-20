@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://r7l4rnkkygdp" path="res://Scenes/Game/Game.cs" id="1_rdw05"]
 [ext_resource type="FontFile" uid="uid://8mjke3wsxh5" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="2_gwu2e"]
+[ext_resource type="PackedScene" uid="uid://dqkbkwed158gi" path="res://Scenes/LivesRemaining/LivesRemaining.tscn" id="3_xbxml"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xrivr"]
 
@@ -75,6 +76,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gwu2e")
 theme_override_font_sizes/font_size = 16
 text = "0000"
+
+[node name="LivesRemaining" parent="." unique_id=95189323 instance=ExtResource("3_xbxml")]
+position = Vector2(30, 618)
 
 [connection signal="area_entered" from="LeftBoundary" to="." method="OnLeftBoundary_AreaEntered"]
 [connection signal="area_entered" from="RightBoundary" to="." method="OnRightBoundary_AreaEntered"]
