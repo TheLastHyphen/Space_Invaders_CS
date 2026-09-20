@@ -3,7 +3,7 @@ using Godot;
 public partial class PlayerMissile : Area2D
 {
 	private bool _canMove = true;
-	private float _missileSpeed = 250;
+	private float _missileSpeed = 600;
 	private bool _isFired = false;
 
 	public override void _Ready()
@@ -26,9 +26,16 @@ public partial class PlayerMissile : Area2D
 
 	public void OnAreaEntered(Area2D area)
 	{
-		if(area.Name == "CeilingBoundary")
-		{
-			QueueFree();
-		}
+		QueueFree();
+
+		// if(area.Name == "CeilingBoundary")
+		// {
+		// 	QueueFree();
+		// }
+		// else
+		// {
+		// 	area.QueueFree();
+		// 	QueueFree();
+		// }
 	}
 }
