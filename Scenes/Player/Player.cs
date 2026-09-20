@@ -8,6 +8,8 @@ public partial class Player : Area2D
 	private bool _canFire = false;
 	private float _playerBaseWidth = 0.0f;
 	private Area2D missile = null;
+	private AudioStream _missileFire = ResourceLoader.Load<AudioStream>("res://Assets/Audio/PlayerFire.wav");
+	private AudioStreamPlayer audioPlayer = new();
 	
 	// for Demo
 	private bool _moveLeft = false;
@@ -21,6 +23,8 @@ public partial class Player : Area2D
 		Position = _playerPosition;
 		_playerBaseWidth = GetNode<Sprite2D>("PlayerSprite").Texture.GetSize().X;
 		SignalBroadCaster.Instance.OnCanFireMissile += OnCanFireMissile;
+		AddChild(audioPlayer);
+		audioPlayer.Stream = _missileFire;		
 	}
 
 	public override void _UnhandledInput(InputEvent inputEvent)
@@ -31,6 +35,7 @@ public partial class Player : Area2D
 		{
 			missile = PackedScenes.Instance.PlayerMissile.Instantiate<PlayerMissile>();
 			missile.Position = Position;
+			audioPlayer.Play();
 			GetParent().AddChild(missile);
 		}
 	}
