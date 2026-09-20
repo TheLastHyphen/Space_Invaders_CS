@@ -6,7 +6,7 @@ public partial class Game : Node2D
 	private Label _numberOfInvadersLabel = null;
 	private Area2D _rightBoundary;
 	private Area2D _leftBoundary;
-	private Area2D invBomb = null;
+	private int _numberOfInvaders = 0;
 
 	public static float LeftBoundaryX { get; private set; }
 	public static float RightBoundaryX { get; private set; }
@@ -17,14 +17,8 @@ public partial class Game : Node2D
 
 		if(inputEvent.IsActionPressed("Exit") == true)
 		{
-			TidyUp();
 			SceneManager.Instance.LoadMainUIScene();
 		}
-
-		// if(inputEvent.IsActionPressed("IncScore") == true)
-		// {
-		// 	ScoreDisplay.Instance.UpdateScore(20);
-		// }
 	}
 
 	public override void _Ready()
@@ -36,6 +30,7 @@ public partial class Game : Node2D
 		LeftBoundaryX = _leftBoundary.Position.X;
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
+		SignalBroadCaster.Instance.OnInvaderHit += OnInvaderHit;
 		Level lev = PackedScenes.Instance.level.Instantiate<Level>();
 		lev.Position = new Vector2(50, 50);
 		AddChild(lev);
@@ -50,6 +45,15 @@ public partial class Game : Node2D
 		AddChild(player);
 	}
 
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		moveTimer.Timeout -= OnMoveTimerTimeOut;
+		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
+		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
+		SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
+	}
+
 	public override void _Draw()
 	{
 		base._Draw();
@@ -59,10 +63,6 @@ public partial class Game : Node2D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		if(GodotObject.IsInstanceValid(invBomb) == false)
-		{
-			invBomb = null;
-		}
 	}
 
 	public void OnMoveTimerTimeOut()
@@ -78,15 +78,17 @@ public partial class Game : Node2D
 
 	private void OnUpdateNumberOfInvaders(int number)
 	{
+		_numberOfInvaders = number;
 		_numberOfInvadersLabel.Text = number.ToString();
 	}
 
-	public void TidyUp()
-	{
-		moveTimer.Timeout -= OnMoveTimerTimeOut;
-		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
-		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
-	}
+	// public void TidyUp()
+	// {
+	// 	moveTimer.Timeout -= OnMoveTimerTimeOut;
+	// 	SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
+	// 	SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
+	// 	SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
+	// }
 
 	public void OnRightBoundary_AreaEntered(Area2D area)
 	{
@@ -96,5 +98,10 @@ public partial class Game : Node2D
 	public void OnLeftBoundary_AreaEntered(Area2D area)
 	{
 		SignalBroadCaster.Instance.EmitOnEdgeOfScreen();
+	}
+
+	private void OnInvaderHit()
+	{
+		OnUpdateNumberOfInvaders(_numberOfInvaders - 1);
 	}
 }
