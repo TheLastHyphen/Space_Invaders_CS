@@ -7,6 +7,11 @@ public partial class Game : Node2D
 	private Area2D _rightBoundary;
 	private Area2D _leftBoundary;
 	private int _numberOfInvaders = 0;
+	private int _moveSoundIndex = 0;
+	private Audio audio = new();
+	private float _movementTimer = 1.0f;
+	private float _movementTimerStep = 0;
+	private AudioStreamPlayer audioPlayer = new();
 
 	public static float LeftBoundaryX { get; private set; }
 	public static float RightBoundaryX { get; private set; }
@@ -43,6 +48,8 @@ public partial class Game : Node2D
 		Player player = PackedScenes.Instance.Player.Instantiate<Player>();
 		player.Position = new Vector2(100, 100);
 		AddChild(player);
+
+		AddChild(audioPlayer);
 	}
 
 	public override void _ExitTree()
@@ -68,6 +75,14 @@ public partial class Game : Node2D
 	public void OnMoveTimerTimeOut()
 	{
 		SignalBroadCaster.Instance.EmitOnMoveTimerTimeOut();
+		PlayMoveSound();
+	}
+
+	private void PlayMoveSound()
+	{
+		if(_moveSoundIndex > 3) _moveSoundIndex = 0;
+		audioPlayer.Stream = audio.MoveSounds[_moveSoundIndex++];
+		audioPlayer.Play();
 	}
 
 	public void OnFinishedDrawingInvaders()
@@ -80,6 +95,7 @@ public partial class Game : Node2D
 	{
 		_numberOfInvaders = number;
 		_numberOfInvadersLabel.Text = number.ToString();
+		_movementTimerStep = _movementTimer / _numberOfInvaders;
 	}
 
 	public void OnRightBoundary_AreaEntered(Area2D area)
@@ -95,5 +111,14 @@ public partial class Game : Node2D
 	private void OnInvaderHit()
 	{
 		OnUpdateNumberOfInvaders(_numberOfInvaders - 1);
+		AdjustInvaderMovementSpeed();
+	}
+
+	private void AdjustInvaderMovementSpeed()
+	{
+		_movementTimer -= _movementTimerStep;
+		if(_movementTimer <= 0) _movementTimer = _movementTimerStep;
+		GD.Print(_movementTimer);
+		moveTimer.WaitTime = _movementTimer;
 	}
 }
