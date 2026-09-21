@@ -4,7 +4,7 @@ public abstract partial class InvaderBase : Area2D
 {
 	private int _direction = 1;
 	private bool _droppingDown = false;
-	private bool _canMove = true;
+	private bool _canMove = false;
 	private bool _frame = true;
 	private bool _canDropBomb = false;
 	private InvaderBombBase invBomb = null;
@@ -12,12 +12,14 @@ public abstract partial class InvaderBase : Area2D
 	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	public abstract int Points { get; }
 	public abstract string InvaderName { get; }
-	public abstract float BombDropChance { get; }
+	[Export]
+	public abstract float BombDropChance { get; set; }
 
 	public override void _Ready()
 	{
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut += OnMoveUpdate;
 		SignalBroadCaster.Instance.OnEdgeOfScreen += OnEdgeOfScreen;
+		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		this.AreaEntered += OnAreaEntered;
 	}
 
@@ -26,6 +28,11 @@ public abstract partial class InvaderBase : Area2D
 		base._ExitTree();
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut -= OnMoveUpdate;
 		SignalBroadCaster.Instance.OnEdgeOfScreen -= OnEdgeOfScreen;
+	}
+
+	private void OnFinishedDrawingInvaders()
+	{
+		_canMove = true;
 	}
 
 	private void Move()
