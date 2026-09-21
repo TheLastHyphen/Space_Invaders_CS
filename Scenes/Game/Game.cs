@@ -1,5 +1,6 @@
 using Godot;
 
+[GlobalClass]
 public partial class Game : Node2D
 {
 	private Timer moveTimer = null;
@@ -9,8 +10,10 @@ public partial class Game : Node2D
 	private int _numberOfInvaders = 0;
 	private int _moveSoundIndex = 0;
 	private Audio audio = new();
+	private float _moveTimerWaitTime = 1.0f;
 	private float _movementTimer = 1.0f;
 	private float _movementTimerStep = 0;
+	private Level _level;
 	private AudioStreamPlayer audioPlayer = new();
 
 	public static float LeftBoundaryX { get; private set; }
@@ -28,6 +31,7 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
+		GetTree().Paused = false;
 		_numberOfInvadersLabel = GetNode<Label>("HBoxContainer/InvadersRemainLabel");
 		_rightBoundary = GetNode<Area2D>("RightBoundary");
 		RightBoundaryX = _rightBoundary.Position.X;
@@ -36,12 +40,12 @@ public partial class Game : Node2D
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
 		SignalBroadCaster.Instance.OnInvaderHit += OnInvaderHit;
-		Level lev = PackedScenes.Instance.level.Instantiate<Level>();
-		lev.Position = new Vector2(50, 50);
-		AddChild(lev);
+		SignalBroadCaster.Instance.OnPlayerZeroLives += OnPlayerZeroLives;
+	
 		RenderingServer.SetDefaultClearColor(Colors.Black);
 		ScoreDisplay.Instance.ClearScore();
 		moveTimer = GetNode<Timer>("MoveTimer");
+		moveTimer.WaitTime = _moveTimerWaitTime;
 		moveTimer.Timeout += OnMoveTimerTimeOut;
 
 		// Create player
@@ -50,6 +54,18 @@ public partial class Game : Node2D
 		AddChild(player);
 
 		AddChild(audioPlayer);
+		LoadLevelScene();
+	}
+
+	private void LoadLevelScene()
+	{
+		moveTimer.Stop();
+		moveTimer.WaitTime = _moveTimerWaitTime;
+		_movementTimer = _moveTimerWaitTime;
+		_level = PackedScenes.Instance.level.Instantiate<Level>();
+		_level.Position = new Vector2(50, 50);
+		AddChild(_level);
+		moveTimer.Start();
 	}
 
 	public override void _ExitTree()
@@ -59,17 +75,13 @@ public partial class Game : Node2D
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
 		SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
+		SignalBroadCaster.Instance.OnPlayerZeroLives -= OnPlayerZeroLives;
 	}
 
 	public override void _Draw()
 	{
 		base._Draw();
 		DrawLine(new Vector2(0, 600), new Vector2(1152, 600), Colors.Green, 5, false);
-	}
-
-	public override void _Process(double delta)
-	{
-		base._Process(delta);
 	}
 
 	public void OnMoveTimerTimeOut()
@@ -90,6 +102,34 @@ public partial class Game : Node2D
 	{
 		moveTimer?.Start();
 		SignalBroadCaster.Instance.EmitOnCanFireMissile();
+	}
+
+	private void CheckForLevelComplete()
+	{
+		if(_numberOfInvaders == 0)
+		{
+			_level.QueueFree();
+			CallDeferred("LoadLevelScene"); // wait until flushing complete before loading next level
+		}
+	}
+
+	private async void OnPlayerZeroLives()
+	{
+		GetTree().Paused = true;
+		GameOver gameOver = PackedScenes.Instance.GameOver.Instantiate<GameOver>();
+		GetParent().AddChild(gameOver);
+		await ToSignal(GetTree().CreateTimer(5.0), "timeout");
+		gameOver.QueueFree();
+		SceneManager.Instance.LoadMainUIScene();
+	}
+
+	private void CheckForGameOver()
+	{
+		if(_numberOfInvaders == 0)
+		{
+			_level.QueueFree();
+			LoadLevelScene();
+		}
 	}
 
 	private void OnUpdateNumberOfInvaders(int number)
@@ -113,6 +153,7 @@ public partial class Game : Node2D
 	{
 		OnUpdateNumberOfInvaders(_numberOfInvaders - 1);
 		AdjustInvaderMovementSpeed();
+		CheckForLevelComplete();
 	}
 
 	private void AdjustInvaderMovementSpeed()
