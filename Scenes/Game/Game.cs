@@ -13,6 +13,7 @@ public partial class Game : Node2D
 	private float _moveTimerWaitTime = 1.0f;
 	private float _movementTimer = 1.0f;
 	private float _movementTimerStep = 0;
+	private bool _allowMove = false;
 	private Level _level;
 	private AudioStreamPlayer audioPlayer = new();
 
@@ -86,8 +87,11 @@ public partial class Game : Node2D
 
 	public void OnMoveTimerTimeOut()
 	{
-		SignalBroadCaster.Instance.EmitOnMoveTimerTimeOut();
-		PlayMoveSound();
+		if(_allowMove == true)
+		{
+			SignalBroadCaster.Instance.EmitOnMoveTimerTimeOut();
+			PlayMoveSound();
+		}
 	}
 
 	private void PlayMoveSound()
@@ -102,6 +106,7 @@ public partial class Game : Node2D
 	{
 		moveTimer?.Start();
 		SignalBroadCaster.Instance.EmitOnCanFireMissile();
+		_allowMove = true;
 	}
 
 	private void CheckForLevelComplete()
