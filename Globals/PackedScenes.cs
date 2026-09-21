@@ -14,6 +14,7 @@ public partial class PackedScenes : Node
 	public PackedScene Game = ResourceLoader.Load<PackedScene>("res://Scenes/Game/Game.tscn");
 	public PackedScene MainUI = ResourceLoader.Load<PackedScene>("res://Scenes/MainUI/MainUi.tscn");
 	public PackedScene PlayerMissile = ResourceLoader.Load<PackedScene>("res://Scenes/PlayerMissile/PlayerMissile.tscn");
+	public PackedScene GameOver = ResourceLoader.Load<PackedScene>("res://Scenes/GameOver/GameOver.tscn");
 
 	public PackedScene[] InvaderBombs =
 	[

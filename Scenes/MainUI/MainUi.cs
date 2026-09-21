@@ -76,7 +76,7 @@ public partial class MainUi : Control
 	{
 		await WaitDrawChar(_playLabel, charDelay, PlayText);
 		await WaitDrawChar(_spaceLabel, charDelay, SpaceText);
-		await WaitDrawChar(_invaderLabel, charDelay, InvaderText);		
+		await WaitDrawChar(_invaderLabel, charDelay, InvaderText);
 	}
 
 	private async Task DrawScoreTable()

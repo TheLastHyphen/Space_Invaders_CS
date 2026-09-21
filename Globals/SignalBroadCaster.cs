@@ -12,6 +12,7 @@ public partial class SignalBroadCaster : Node
 	public Action OnCanFireMissile;
 	public Action OnInvaderHit;
 	public Action OnPlayerHit;
+	public Action OnPlayerZeroLives;
 
 	public override void _Ready()
 	{
@@ -51,5 +52,10 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnPlayerHit()
 	{
 		OnPlayerHit?.Invoke();
+	}
+
+	public void EmitOnPlayerZeroLives()
+	{
+		OnPlayerZeroLives?.Invoke();
 	}
 }
