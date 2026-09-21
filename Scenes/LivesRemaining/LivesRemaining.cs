@@ -28,6 +28,7 @@ public partial class LivesRemaining : Node2D
 		switch(_remainingLives)
 		{
 			case 0: _liveLabel.Text = "0";
+					SignalBroadCaster.Instance.EmitOnPlayerZeroLives();
 					break;
 			case 1: _life2.Hide();
 					_liveLabel.Text = "1";
