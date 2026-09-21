@@ -81,6 +81,7 @@ public partial class Game : Node2D
 	private void PlayMoveSound()
 	{
 		if(_moveSoundIndex > 3) _moveSoundIndex = 0;
+		audioPlayer.VolumeLinear = 1.0f;
 		audioPlayer.Stream = audio.MoveSounds[_moveSoundIndex++];
 		audioPlayer.Play();
 	}
@@ -118,7 +119,6 @@ public partial class Game : Node2D
 	{
 		_movementTimer -= _movementTimerStep;
 		if(_movementTimer <= 0) _movementTimer = _movementTimerStep;
-		GD.Print(_movementTimer);
 		moveTimer.WaitTime = _movementTimer;
 	}
 }
