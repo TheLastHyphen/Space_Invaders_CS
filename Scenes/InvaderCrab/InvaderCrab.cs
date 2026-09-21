@@ -4,7 +4,13 @@ public partial class InvaderCrab : InvaderBase
 {
 	public override int Points => 20;
 	public override string InvaderName => "I am Invader Crab";
-	public override float BombDropChance => 0.015f;
+
+	private float _bombDropChance = 0.035f;
+	public override float BombDropChance
+	{
+		get => _bombDropChance;
+		set => value = _bombDropChance;
+	}
 
 	public override void _Ready()
 	{

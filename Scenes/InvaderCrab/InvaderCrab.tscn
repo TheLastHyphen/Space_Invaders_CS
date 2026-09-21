@@ -32,6 +32,7 @@ size = Vector2(32, 22)
 collision_layer = 16
 collision_mask = 76
 script = ExtResource("1_awpnw")
+BombDropChance = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=802952830]
 sprite_frames = SubResource("SpriteFrames_13qdw")
