@@ -8,7 +8,7 @@ public partial class Player : Area2D
 	private bool _canFire = false;
 	private float _playerBaseWidth = 0.0f;
 	private Area2D missile = null;
-	private AudioStream _missileFire = ResourceLoader.Load<AudioStream>("res://Assets/Audio/PlayerFire.wav");
+	private AudioStream _missileFire = ResourceLoader.Load<AudioStream>("res://Assets/Audio/PlayerFire_alt.wav");
 	private AudioStreamPlayer audioPlayer = new();
 	
 	// for Demo
