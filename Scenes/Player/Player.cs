@@ -65,6 +65,7 @@ public partial class Player : Area2D
 
 	public void OnAreaEntered(Area2D area)
 	{
+		if(area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
 		SignalBroadCaster.Instance.EmitOnPlayerHit();
 	}
 }
