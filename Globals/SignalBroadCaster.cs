@@ -13,6 +13,7 @@ public partial class SignalBroadCaster : Node
 	public Action OnInvaderHit;
 	public Action OnPlayerHit;
 	public Action OnPlayerZeroLives;
+	public Action<Area2D> OnInvaderBombHit;
 
 	public override void _Ready()
 	{
@@ -57,5 +58,10 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnPlayerZeroLives()
 	{
 		OnPlayerZeroLives?.Invoke();
+	}
+
+	public void EmitOnInvaderBombHit(Area2D area)
+	{
+		OnInvaderBombHit?.Invoke(area);
 	}
 }

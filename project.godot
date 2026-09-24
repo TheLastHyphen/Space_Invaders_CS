@@ -80,6 +80,7 @@ PlayerFire={
 2d_physics/layer_6="Player"
 2d_physics/layer_7="PlayerMissile"
 2d_physics/layer_8="InvaderBomb"
+2d_physics/layer_9="BunkerBlock"
 
 [physics]
 

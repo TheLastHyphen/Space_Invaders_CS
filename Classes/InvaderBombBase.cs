@@ -21,7 +21,7 @@ public abstract partial class InvaderBombBase : Area2D
 	}
 
 	public void OnAreaEntered(Area2D area)
-	{
+	{		
 		if(area.Name == "PlayerMissile")
 		{
 			ScoreDisplay.Instance.UpdateScore(Points);
