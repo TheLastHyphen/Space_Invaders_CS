@@ -30,7 +30,7 @@ size = Vector2(32, 22)
 
 [node name="InvaderOctopus" type="Area2D" unique_id=633685619]
 collision_layer = 16
-collision_mask = 76
+collision_mask = 332
 script = ExtResource("1_d6b1k")
 BombDropChance = 1.0
 
