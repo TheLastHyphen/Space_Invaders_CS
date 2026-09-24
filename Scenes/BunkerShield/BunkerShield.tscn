@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://c55y8rx3b6tfm"]
+
+[ext_resource type="PackedScene" uid="uid://dkdt0hrh0oecu" path="res://Scenes/BunkerBlock/BunkerBlock.tscn" id="1_tmj8e"]
+
+[node name="BunkerShield" type="Node2D" unique_id=1763207096]
+
+[node name="BunkerBlock" parent="." unique_id=1437078491 instance=ExtResource("1_tmj8e")]
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock2" parent="." unique_id=1672121246 instance=ExtResource("1_tmj8e")]
+position = Vector2(16, 0)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock3" parent="." unique_id=1903222157 instance=ExtResource("1_tmj8e")]
+position = Vector2(32, 0)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock6" parent="." unique_id=39924229 instance=ExtResource("1_tmj8e")]
+position = Vector2(-15.999992, 16)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock7" parent="." unique_id=1306240311 instance=ExtResource("1_tmj8e")]
+position = Vector2(6.67572e-06, 16)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock8" parent="." unique_id=265649418 instance=ExtResource("1_tmj8e")]
+position = Vector2(16.000008, 16)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock9" parent="." unique_id=583549697 instance=ExtResource("1_tmj8e")]
+position = Vector2(32.000008, 16)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock10" parent="." unique_id=1857995066 instance=ExtResource("1_tmj8e")]
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock11" parent="." unique_id=1080639095 instance=ExtResource("1_tmj8e")]
+position = Vector2(-16, 32.000004)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock12" parent="." unique_id=1924262279 instance=ExtResource("1_tmj8e")]
+position = Vector2(-16, 48)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock13" parent="." unique_id=1467989301 instance=ExtResource("1_tmj8e")]
+position = Vector2(0, 32)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock14" parent="." unique_id=1565473079 instance=ExtResource("1_tmj8e")]
+position = Vector2(16, 32)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock15" parent="." unique_id=2019097373 instance=ExtResource("1_tmj8e")]
+position = Vector2(32.000004, 32)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock16" parent="." unique_id=175282929 instance=ExtResource("1_tmj8e")]
+position = Vector2(48, 32)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock17" parent="." unique_id=721211353 instance=ExtResource("1_tmj8e")]
+position = Vector2(48, 64)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock18" parent="." unique_id=922531280 instance=ExtResource("1_tmj8e")]
+position = Vector2(32, 48)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock19" parent="." unique_id=435111048 instance=ExtResource("1_tmj8e")]
+position = Vector2(-16, 64)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock20" parent="." unique_id=259392996 instance=ExtResource("1_tmj8e")]
+position = Vector2(0, 48)
+scale = Vector2(2, 2)
+
+[node name="BunkerBlock21" parent="." unique_id=2116743672 instance=ExtResource("1_tmj8e")]
+position = Vector2(48, 48)
+scale = Vector2(2, 2)
