@@ -97,11 +97,15 @@ public abstract partial class InvaderBase : Area2D
 
 	private void OnAreaEntered(Area2D area)
 	{
+		GD.Print("Invader hit = ", area.Name);
+		if(area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
+
 		if(area.Name == "PlayerMissile")
 		{
 			ScoreDisplay.Instance.UpdateScore(Points);
 			SignalBroadCaster.Instance.OnInvaderHit();
 			QueueFree();
 		}
+		area.QueueFree();
 	}
 }
