@@ -49,6 +49,10 @@ public partial class Game : Node2D
 		moveTimer.WaitTime = _moveTimerWaitTime;
 		moveTimer.Timeout += OnMoveTimerTimeOut;
 
+		// var shield = PackedScenes.Instance.BunkerShield.Instantiate<Node2D>();
+		// shield.Position = new Vector2(273, 400);
+		// AddChild(shield);
+
 		// Create player
 		Player player = PackedScenes.Instance.Player.Instantiate<Player>();
 		player.Position = new Vector2(100, 100);
