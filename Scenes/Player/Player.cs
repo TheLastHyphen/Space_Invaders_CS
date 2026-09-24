@@ -7,6 +7,8 @@ public partial class Player : Area2D
 	private bool _canMove = true;
 	private bool _canFire = false;
 	private float _playerBaseWidth = 0.0f;
+	private Sprite2D _player;
+	private AnimatedSprite2D _playerExplode;
 	private Area2D missile = null;
 	private AudioStream _missileFire = ResourceLoader.Load<AudioStream>("res://Assets/Audio/PlayerFire_alt.wav");
 	private AudioStreamPlayer audioPlayer = new();
@@ -16,11 +18,22 @@ public partial class Player : Area2D
 	private bool _moveRight = false;
 	private bool _flip = false;
 	private bool _demoFire = false;
+	private int _numberOfHits = 0;
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		//_playerExplode.AnimationFinished -= OnAnimationFinished;
+	}
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Position = _playerPosition;
+		_player = GetNode<Sprite2D>("PlayerSprite");
+		_playerExplode = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_playerExplode.AnimationFinished += OnAnimationFinished;
+		_playerExplode.Hide();
 		_playerBaseWidth = GetNode<Sprite2D>("PlayerSprite").Texture.GetSize().X;
 		SignalBroadCaster.Instance.OnCanFireMissile += OnCanFireMissile;
 		AddChild(audioPlayer);
@@ -43,6 +56,7 @@ public partial class Player : Area2D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+		if(_canMove == false) return;
 		Vector2 pos = Position;
 		float dir = Input.GetAxis("PlayerLeft", "PlayerRight");
 		pos.X += dir * (float)delta * playerSpeed;
@@ -66,6 +80,18 @@ public partial class Player : Area2D
 	public void OnAreaEntered(Area2D area)
 	{
 		if(area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
+		++_numberOfHits;
+		_canMove = false;
+		_player.Hide();
+		_playerExplode.Show();
+		_playerExplode.Play();
+	}
+
+	private async void OnAnimationFinished()
+	{
 		SignalBroadCaster.Instance.EmitOnPlayerHit();
+		_playerExplode.Hide();
+		if(_numberOfHits < 3) _player.Show();
+		_canMove = true;
 	}
 }
