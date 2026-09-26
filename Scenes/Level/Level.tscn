@@ -3,5 +3,6 @@
 [ext_resource type="Script" uid="uid://dah66gfq1fj12" path="res://Scenes/Level/Level.cs" id="1_vbawi"]
 
 [node name="Level" type="Node2D" unique_id=1638020743]
+position = Vector2(-5, -3)
 script = ExtResource("1_vbawi")
-InvadersInRow = 20
+InvadersInRow = 15
