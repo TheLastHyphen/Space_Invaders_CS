@@ -4,6 +4,8 @@
 [ext_resource type="FontFile" uid="uid://8mjke3wsxh5" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="2_gwu2e"]
 [ext_resource type="PackedScene" uid="uid://dqkbkwed158gi" path="res://Scenes/LivesRemaining/LivesRemaining.tscn" id="3_xbxml"]
 [ext_resource type="PackedScene" uid="uid://c55y8rx3b6tfm" path="res://Scenes/BunkerShield/BunkerShield.tscn" id="4_ln2h6"]
+[ext_resource type="PackedScene" uid="uid://c8wd1q5riud63" path="res://Scenes/Player/Player.tscn" id="5_y3kpf"]
+[ext_resource type="PackedScene" uid="uid://cugadacyx3vs6" path="res://Scenes/PlayerMissileExplode/PlayerMissileExplode.tscn" id="6_3k6gv"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xrivr"]
 
@@ -82,16 +84,23 @@ text = "0000"
 position = Vector2(30, 618)
 
 [node name="BunkerShield" parent="." unique_id=1763207096 instance=ExtResource("4_ln2h6")]
-position = Vector2(200, 456)
+position = Vector2(168, 432)
 
 [node name="BunkerShield2" parent="." unique_id=2077487666 instance=ExtResource("4_ln2h6")]
-position = Vector2(440, 456)
+position = Vector2(424, 432)
 
 [node name="BunkerShield3" parent="." unique_id=1756782771 instance=ExtResource("4_ln2h6")]
-position = Vector2(680, 456)
+position = Vector2(680, 432)
 
 [node name="BunkerShield4" parent="." unique_id=1911280552 instance=ExtResource("4_ln2h6")]
-position = Vector2(920, 456)
+position = Vector2(936, 432)
+
+[node name="Player" parent="." unique_id=1507375035 instance=ExtResource("5_y3kpf")]
+position = Vector2(192, 558)
+
+[node name="Effects" type="Node" parent="." unique_id=1682296581]
+
+[node name="PlayerMissileExplode" parent="Effects" unique_id=474443416 instance=ExtResource("6_3k6gv")]
 
 [connection signal="area_entered" from="LeftBoundary" to="." method="OnLeftBoundary_AreaEntered"]
 [connection signal="area_entered" from="RightBoundary" to="." method="OnRightBoundary_AreaEntered"]

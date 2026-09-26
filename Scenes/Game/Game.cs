@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -16,6 +17,9 @@ public partial class Game : Node2D
 	private bool _allowMove = false;
 	private Level _level;
 	private AudioStreamPlayer audioPlayer = new();
+	private PlayerMissileExplode _playerMissileExplode;
+
+	private Player _player;
 
 	public static float LeftBoundaryX { get; private set; }
 	public static float RightBoundaryX { get; private set; }
@@ -42,6 +46,7 @@ public partial class Game : Node2D
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders += OnUpdateNumberOfInvaders;
 		SignalBroadCaster.Instance.OnInvaderHit += OnInvaderHit;
 		SignalBroadCaster.Instance.OnPlayerZeroLives += OnPlayerZeroLives;
+		SignalBroadCaster.Instance.OnPlayerMissileHit += OnPlayerMissileHit;
 	
 		RenderingServer.SetDefaultClearColor(Colors.Black);
 		ScoreDisplay.Instance.ClearScore();
@@ -49,17 +54,37 @@ public partial class Game : Node2D
 		moveTimer.WaitTime = _moveTimerWaitTime;
 		moveTimer.Timeout += OnMoveTimerTimeOut;
 
+		_playerMissileExplode = GetNode<PlayerMissileExplode>("Effects/PlayerMissileExplode");
+
 		// var shield = PackedScenes.Instance.BunkerShield.Instantiate<Node2D>();
 		// shield.Position = new Vector2(273, 400);
 		// AddChild(shield);
 
 		// Create player
-		Player player = PackedScenes.Instance.Player.Instantiate<Player>();
-		player.Position = new Vector2(100, 100);
-		AddChild(player);
+		//Player player = PackedScenes.Instance.Player.Instantiate<Player>();
+		// _player = GetNode<Player>("Player");
+		// _player.Position = new Vector2(100, 100);
+		// AddChild(_player);
 
 		AddChild(audioPlayer);
 		LoadLevelScene();
+	}
+
+	private void OnPlayerMissileHit(Vector2 position, String name)
+	{
+		AnimatedSprite2D animatedSprite2D = _playerMissileExplode.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+		if(name == "CeilingBoundary")
+		{
+			animatedSprite2D.Modulate = Colors.Red;
+		}
+		else
+		{
+			animatedSprite2D.Modulate = Colors.White;
+		}
+
+		_playerMissileExplode.Position = position;
+		animatedSprite2D.Play();
 	}
 
 	private void LoadLevelScene()
@@ -81,6 +106,7 @@ public partial class Game : Node2D
 		SignalBroadCaster.Instance.OnUpdateNumberOfInvaders -= OnUpdateNumberOfInvaders;
 		SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
 		SignalBroadCaster.Instance.OnPlayerZeroLives -= OnPlayerZeroLives;
+		SignalBroadCaster.Instance.OnPlayerMissileHit -= OnPlayerMissileHit;
 	}
 
 	public override void _Draw()
