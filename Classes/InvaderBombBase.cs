@@ -13,12 +13,21 @@ public abstract partial class InvaderBombBase : Area2D
 		_speed = (int)GD.RandRange(75.0f, 400.0f);
 	}
 
-	public override void _Process(double delta)
+	// public override void _Process(double delta)
+	// {
+	// 	Vector2 pos = Position;
+	// 	pos.Y += 1 * (float)delta * _speed;
+	// 	Position = pos;
+	// }
+
+	public override void _PhysicsProcess(double delta)
 	{
+		base._PhysicsProcess(delta);
 		Vector2 pos = Position;
 		pos.Y += 1 * (float)delta * _speed;
 		Position = pos;
 	}
+
 
 	public void OnAreaEntered(Area2D area)
 	{		
