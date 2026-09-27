@@ -2,7 +2,7 @@ using Godot;
 
 public partial class InvaderOctopus : InvaderBase
 {
-	public override int Points => 10;
+	public override uint Points => 10;
 	public override string InvaderName => "I and Invader Octopus";
 
 	private float _bombDropChance = 0.035f;
