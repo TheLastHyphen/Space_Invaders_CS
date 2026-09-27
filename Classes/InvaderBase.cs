@@ -10,7 +10,7 @@ public abstract partial class InvaderBase : Area2D
 	private InvaderBombBase invBomb = null;
 			
 	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-	public abstract int Points { get; }
+	public abstract uint Points { get; }
 	public abstract string InvaderName { get; }
 	[Export]
 	public abstract float BombDropChance { get; set; }
