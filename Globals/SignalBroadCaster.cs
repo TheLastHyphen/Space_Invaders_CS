@@ -15,6 +15,7 @@ public partial class SignalBroadCaster : Node
 	public Action OnPlayerZeroLives;
 	public Action<Area2D> OnInvaderBombHit;
 	public Action<Vector2, String> OnPlayerMissileHit;
+	public Action OnExtraLife;
 
 	public override void _Ready()
 	{
@@ -69,5 +70,10 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnPlayerMissileHit(Vector2 position, String name)
 	{
 		OnPlayerMissileHit?.Invoke(position, name);
+	}
+
+	public void EmitOnExtraLife()
+	{
+		OnExtraLife?.Invoke();
 	}
 }
