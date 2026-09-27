@@ -1,8 +1,12 @@
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using Godot;
 
 public partial class Player : Area2D
 {
+	[Export]
+	public bool IsInvinsible { get; set; }
+
 	private float playerSpeed = 350.0f;
 	private bool _canMove = true;
 	private bool _canFire = false;
@@ -37,6 +41,15 @@ public partial class Player : Area2D
 		SignalBroadCaster.Instance.OnCanFireMissile += OnCanFireMissile;
 		AddChild(audioPlayer);
 		audioPlayer.Stream = _missileFire;
+
+		if(IsInvinsible == true)
+		{
+			_player.Modulate = Colors.BlueViolet;
+		}
+		else
+		{
+			_player.Modulate = Colors.Green;
+		}
 	}
 
 	public override void _UnhandledInput(InputEvent inputEvent)
@@ -49,6 +62,7 @@ public partial class Player : Area2D
 			missile = PackedScenes.Instance.PlayerMissile.Instantiate<PlayerMissile>();			
 			missile.Position = GlobalPosition;
 			GetParent().AddChild(missile);
+			if(States.Instance.IsSoundsMute == true) return;
 			audioPlayer.Play();			
 		}
 	}
@@ -80,13 +94,16 @@ public partial class Player : Area2D
 
 	public void OnAreaEntered(Area2D area)
 	{
-		if(area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
-		++_numberOfHits;
-		_canMove = false;
-		_canFire = false;
-		_player.Hide();
-		_playerExplode.Show();
-		_playerExplode.Play();
+		if(IsInvinsible == false)
+		{
+			if(area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
+			++_numberOfHits;
+			_canMove = false;
+			_canFire = false;
+			_player.Hide();
+			_playerExplode.Show();
+			_playerExplode.Play();
+		}
 	}
 
 	private async void OnAnimationFinished()
