@@ -97,6 +97,7 @@ position = Vector2(936, 432)
 
 [node name="Player" parent="." unique_id=1507375035 instance=ExtResource("5_y3kpf")]
 position = Vector2(192, 558)
+IsInvinsible = true
 
 [node name="Effects" type="Node" parent="." unique_id=1682296581]
 
