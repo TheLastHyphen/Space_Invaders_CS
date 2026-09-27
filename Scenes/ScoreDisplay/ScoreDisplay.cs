@@ -6,14 +6,41 @@ public partial class ScoreDisplay : Control
 
 	private Label _scoreLabel;
 	private Label _highScoreLabel;
-	private int _score;
-	private int _highScore;
+	private uint _score;
+	private uint _highScore;
+	private uint _extraLifePoints = 1500;
 
-	public void UpdateScore(int points)
+	private uint _nextLifePointsAt;
+	public uint NextLifePointsAt 
+	{
+		get => _nextLifePointsAt;
+		set => _nextLifePointsAt = value;
+	}
+
+	public void InitialiseScores()
+	{
+		_score = 0;
+		NextLifePointsAt = _extraLifePoints;
+	}
+
+	public void UpdateScore(uint points)
 	{
 		_score += points;
 		UpdateScoreLabel();
 		UpdateHighScore();
+		CheckForExtraLife();
+	}
+
+	private void CheckForExtraLife()
+	{
+		if(_score > 0)
+		{
+			if(_score >= _nextLifePointsAt)
+			{
+				_nextLifePointsAt += _extraLifePoints;
+				SignalBroadCaster.Instance.EmitOnExtraLife();
+			}
+		}
 	}
 
 	public void ClearScore()
@@ -50,5 +77,6 @@ public partial class ScoreDisplay : Control
 		UpdateScoreLabel();
 		_highScore = 200;
 		UpdateHighScoreLabel();
+		InitialiseScores();
 	}
 }
