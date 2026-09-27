@@ -32,6 +32,21 @@ public partial class Game : Node2D
 		{
 			SceneManager.Instance.LoadMainUIScene();
 		}
+
+		if(inputEvent.IsActionPressed("MuteSounds") == true)
+		{
+			States.Instance.MuteSound();
+		}
+
+		if(inputEvent.IsActionPressed("AddScore_Debug") == true)
+		{
+			ScoreDisplay.Instance.UpdateScore(1500);
+		}
+
+		if(inputEvent.IsActionPressed("KillPlayer") == true)
+		{
+			SignalBroadCaster.Instance.EmitOnPlayerHit();
+		}
 	}
 
 	public override void _Ready()
@@ -56,18 +71,9 @@ public partial class Game : Node2D
 
 		_playerMissileExplode = GetNode<PlayerMissileExplode>("Effects/PlayerMissileExplode");
 
-		// var shield = PackedScenes.Instance.BunkerShield.Instantiate<Node2D>();
-		// shield.Position = new Vector2(273, 400);
-		// AddChild(shield);
-
-		// Create player
-		//Player player = PackedScenes.Instance.Player.Instantiate<Player>();
-		// _player = GetNode<Player>("Player");
-		// _player.Position = new Vector2(100, 100);
-		// AddChild(_player);
-
 		AddChild(audioPlayer);
 		LoadLevelScene();
+		ScoreDisplay.Instance.InitialiseScores();
 	}
 
 	private void OnPlayerMissileHit(Vector2 position, String name)
@@ -107,6 +113,7 @@ public partial class Game : Node2D
 		SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
 		SignalBroadCaster.Instance.OnPlayerZeroLives -= OnPlayerZeroLives;
 		SignalBroadCaster.Instance.OnPlayerMissileHit -= OnPlayerMissileHit;
+		QueueFree();
 	}
 
 	public override void _Draw()
@@ -120,6 +127,7 @@ public partial class Game : Node2D
 		if(_allowMove == true)
 		{
 			SignalBroadCaster.Instance.EmitOnMoveTimerTimeOut();
+			if(States.Instance.IsSoundsMute == true) return;
 			PlayMoveSound();
 		}
 	}
