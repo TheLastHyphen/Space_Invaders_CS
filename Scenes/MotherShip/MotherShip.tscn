@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://bldbuo7yfsmkx"]
+
+[ext_resource type="Texture2D" uid="uid://q0me65o2auxg" path="res://Assets/SpaceShip/MotherShip.png" id="1_ihbix"]
+[ext_resource type="Script" uid="uid://2d1iohpas6yy" path="res://Scenes/MotherShip/MotherShip.cs" id="1_puugc"]
+[ext_resource type="Texture2D" uid="uid://dc0lxnx6c2rlx" path="res://Assets/SpaceShip/MotherShipExplode-sheet.png" id="3_27a3h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(54, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x613"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(0, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6i7a"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(54, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4djnc"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(108, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ow5s"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(162, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tospx"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(216, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khaix"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(270, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8ysy"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(324, 0, 54, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4vv6"]
+atlas = ExtResource("3_27a3h")
+region = Rect2(378, 0, 54, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0x613")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6i7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4djnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ow5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tospx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khaix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8ysy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4vv6")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="MotherShip" type="Area2D" unique_id=1639888377]
+collision_layer = 1024
+collision_mask = 6208
+script = ExtResource("1_puugc")
+Speed = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=134116087]
+texture = ExtResource("1_ihbix")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=505449629]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1873628575]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "300"
+horizontal_alignment = 1
+
+[node name="Explode" type="AnimatedSprite2D" parent="." unique_id=2000297062]
+visible = false
+sprite_frames = SubResource("SpriteFrames_xrivr")
+frame = 7
+frame_progress = 1.0
