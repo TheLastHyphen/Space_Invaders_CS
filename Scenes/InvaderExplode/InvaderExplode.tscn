@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://b7ucwdqgndqhd"]
+
+[ext_resource type="Texture2D" uid="uid://jpa216tr2vqx" path="res://Assets/InvaderExplode/InvaderExplode-sheet.png" id="1_k6wja"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sdun"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doe52"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(16, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt6q8"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(32, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw78m"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(48, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qvm1"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(64, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l87h"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(80, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rne1t"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(96, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1soo"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(112, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3jjg"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(128, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2mk8"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(144, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpm1g"]
+atlas = ExtResource("1_k6wja")
+region = Rect2(160, 0, 15, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sdun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doe52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt6q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw78m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qvm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l87h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rne1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1soo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3jjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2mk8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpm1g")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 25.0
+}]
+
+[node name="InvaderExplode" type="Node2D" unique_id=1856015843]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=740665056]
+sprite_frames = SubResource("SpriteFrames_xrivr")
+frame = 10
+frame_progress = 1.0

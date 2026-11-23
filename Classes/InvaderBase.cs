@@ -2,25 +2,35 @@ using Godot;
 
 public abstract partial class InvaderBase : Area2D
 {
+	[Export] public abstract float BombDropChance { get; set; }
+	
 	private int _direction = 1;
-	private bool _droppingDown = false;
-	private bool _canMove = false;
+	private bool _droppingDown;
+	private bool _canMove;
 	private bool _frame = true;
-	private bool _canDropBomb = false;
-	private InvaderBombBase invBomb = null;
-			
-	public AnimatedSprite2D InvAnimatedSprite => GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-	public abstract uint Points { get; }
-	public abstract string InvaderName { get; }
-	[Export]
-	public abstract float BombDropChance { get; set; }
+	private bool _canDropBomb;
+	private InvaderBombBase _invBomb;
+	private int _moveSoundIndex = 0;
+	
+	public abstract AnimatedSprite2D InvAnimatedSprite { get; }
+
+	protected abstract uint Points { get; }
+	protected abstract string InvaderName { get; }
 
 	public override void _Ready()
 	{
+		base._Ready();
+		InvAnimatedSprite.Animation = "Move";
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut += OnMoveUpdate;
 		SignalBroadCaster.Instance.OnEdgeOfScreen += OnEdgeOfScreen;
 		SignalBroadCaster.Instance.OnFinishedDrawingInvaders += OnFinishedDrawingInvaders;
-		this.AreaEntered += OnAreaEntered;
+		AreaEntered += OnAreaEntered;
+		InvAnimatedSprite.AnimationFinished += OnAnimationFinished;
+	}
+
+	private void OnMoveTimerTimeOut()
+	{
+		OnMoveUpdate();
 	}
 
 	public override void _ExitTree()
@@ -28,6 +38,7 @@ public abstract partial class InvaderBase : Area2D
 		base._ExitTree();
 		SignalBroadCaster.Instance.OnMoveTimerTimeOut -= OnMoveUpdate;
 		SignalBroadCaster.Instance.OnEdgeOfScreen -= OnEdgeOfScreen;
+		SignalBroadCaster.Instance.OnFinishedDrawingInvaders -= OnFinishedDrawingInvaders;
 	}
 
 	private void OnFinishedDrawingInvaders()
@@ -37,29 +48,20 @@ public abstract partial class InvaderBase : Area2D
 
 	private void Move()
 	{
-		if(_canMove)
-		{
-			Position = new Vector2(Position.X + 15 * _direction, Position.Y);
-			if(_frame)
-			{
-				InvAnimatedSprite.Frame = 1;
-			}
-			else
-			{
-				InvAnimatedSprite.Frame = 0;
-			}
-			_frame = !_frame;
-		}
+		if (!_canMove) return;
+
+		Position = new Vector2(Position.X + 15 * _direction, Position.Y);
+		InvAnimatedSprite.Frame = _frame ? 1 : 0;
+		_frame = !_frame;
 	}
 
 	private void OnMoveUpdate()
 	{
-		//_canDropBomb = false;
-		if(_droppingDown == false)
+		if(!_droppingDown)
 		{
 			Move();
 		
-			if(DropBomb() == true)// && GodotObject.IsInstanceValid(invBomb) == false)
+			if(DropBomb())
 			{
 				CreateInvaderBomb();
 			}
@@ -74,38 +76,50 @@ public abstract partial class InvaderBase : Area2D
 
 	private void CreateInvaderBomb()
 	{
-		invBomb = PackedScenes.Instance.InvaderBombs[GD.Randi() % 2].Instantiate<InvaderBombBase>();
-		invBomb.Position = Position;
-		GetParent().AddChild(invBomb);
+		_invBomb = PackedScenes.Instance.InvaderBombs[GD.Randi() % 2].Instantiate<InvaderBombBase>();
+		_invBomb.Position = Position;
+		GetParent().AddChild(_invBomb);
 	}
 
-	public void OnEdgeOfScreen()
+	private void OnEdgeOfScreen()
 	{
 		_droppingDown = true;
 	}
 
 	private bool DropBomb()
 	{
-		if(RandomFloatZeroToOne() <= BombDropChance) return true;
-		return false;
+		return RandomFloat() <= BombDropChance; 
 	}
 
-	private float RandomFloatZeroToOne()
+	private float RandomFloat()
 	{
 		return GD.Randf();
 	}
 
-	private void OnAreaEntered(Area2D area)
+	private async void OnAreaEntered(Area2D area)
 	{
-		GD.Print("Invader hit = ", area.Name);
-		if(area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
-
-		if(area.Name == "PlayerMissile")
+		//GD.Print(area.Name);
+		if (area.Name == "LeftBoundary" || area.Name == "RightBoundary") return;
+		if (area.Name == "FloorBoundary")
 		{
-			ScoreDisplay.Instance.UpdateScore(Points);
-			SignalBroadCaster.Instance.OnInvaderHit();
-			QueueFree();
+			GD.Print("Invader hit the floor");
+			SignalBroadCaster.Instance.EmitOnInvaderHitFloor();
 		}
-		area.QueueFree();
+		if (area.Name != "PlayerMissile") return;
+
+		AreaEntered -= OnAreaEntered;
+		_canMove = false;
+		SetDeferred("monitorable", false);
+		SignalBroadCaster.Instance.EmitOnPointScored(Points);
+		InvAnimatedSprite.Animation = "Explode";
+		InvAnimatedSprite.Scale = new Vector2(2.0f, 2.0f);
+		InvAnimatedSprite.Play("Explode");
+		SoundManager.Instance.PlayStream(SoundEffect.InvaderKilled);
+		SignalBroadCaster.Instance.EmitOnInvaderKilled();
+	}
+
+	private void OnAnimationFinished()
+	{
+		QueueFree();
 	}
 }

@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
 public partial class PackedScenes : Node
 {
@@ -13,10 +11,11 @@ public partial class PackedScenes : Node
 	public PackedScene Player = ResourceLoader.Load<PackedScene>("res://Scenes/Player/Player.tscn");
 	public PackedScene Game = ResourceLoader.Load<PackedScene>("res://Scenes/Game/Game.tscn");
 	public PackedScene MainUI = ResourceLoader.Load<PackedScene>("res://Scenes/MainUI/MainUi.tscn");
-	public PackedScene PlayerMissile = ResourceLoader.Load<PackedScene>("res://Scenes/PlayerMissile/PlayerMissile.tscn");
+	public PackedScene PlayerMissile;// = ResourceLoader.Load<PackedScene>("res://Scenes/PlayerMissile/PlayerMissile.tscn");
 	public PackedScene GameOver = ResourceLoader.Load<PackedScene>("res://Scenes/GameOver/GameOver.tscn");
 	public PackedScene BunkerShield = ResourceLoader.Load<PackedScene>("res://Scenes/BunkerShield/BunkerShield.tscn");
-
+	public PackedScene MotherShip;
+	
 	public PackedScene[] InvaderBombs =
 	[
 		ResourceLoader.Load<PackedScene>("res://Scenes/InvaderBombType1/InvaderBombType1.tscn"),
@@ -26,5 +25,7 @@ public partial class PackedScenes : Node
 	public override void _Ready()
 	{
 		Instance = this;
+		PlayerMissile = ResourceLoader.Load<PackedScene>("res://Scenes/PlayerMissile/PlayerMissile.tscn");
+		MotherShip = ResourceLoader.Load<PackedScene>("res://Scenes/MotherShip/MotherShip.tscn");
 	}
 }

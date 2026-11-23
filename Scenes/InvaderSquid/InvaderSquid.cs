@@ -2,8 +2,11 @@ using Godot;
 
 public partial class InvaderSquid : InvaderBase
 {
-	public override uint Points => 30;
-	public override string InvaderName => "I am an Invader Squid";
+	protected override uint Points => 30;
+	protected override string InvaderName => "I am an Invader Squid";
+
+	AnimatedSprite2D _invAnimatedSprite;
+	public override AnimatedSprite2D InvAnimatedSprite => _invAnimatedSprite;
 
 	private float _bombDropChance = 0.035f;
 	public override float BombDropChance
@@ -13,7 +16,8 @@ public partial class InvaderSquid : InvaderBase
 	}
 
 	public override void _Ready()
-	{		
+	{
+		_invAnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		base._Ready();
 	}
 }

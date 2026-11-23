@@ -22,10 +22,7 @@ public partial class MainUi : Control
 	private const string SquidPointsText = "= 30 POINTS";
 	private const string CrabPointsText = "= 20 POINTS";
 	private const string OctopusPointsText = "= 10 POINTS";
-
-
-	private const float charDelay = 0.06f;
-	int count = 0;
+	private const float CharDelay = 0.06f;
 	
 	public override void _UnhandledInput(InputEvent inputEvent)
 	{
@@ -40,7 +37,7 @@ public partial class MainUi : Control
 	public async override void _Ready()
 	{
 		RenderingServer.SetDefaultClearColor(Colors.Black);
-		ScoreDisplay.Instance.ClearScore();
+		ScoreBoard.Instance.ClearScore();
 		_scoreTableVbox = GetNode<VBoxContainer>("ScoreTableVBox");
 		_scoreTableVbox.Hide();
 		_scoreAdvLabel = GetNode<Label>("ScoreAdvLabel");
@@ -74,9 +71,9 @@ public partial class MainUi : Control
 
 	private async Task DrawText()
 	{
-		await WaitDrawChar(_playLabel, charDelay, PlayText);
-		await WaitDrawChar(_spaceLabel, charDelay, SpaceText);
-		await WaitDrawChar(_invaderLabel, charDelay, InvaderText);
+		await WaitDrawChar(_playLabel, CharDelay, PlayText);
+		await WaitDrawChar(_spaceLabel, CharDelay, SpaceText);
+		await WaitDrawChar(_invaderLabel, CharDelay, InvaderText);
 	}
 
 	private async Task DrawScoreTable()
@@ -85,10 +82,10 @@ public partial class MainUi : Control
 		_scoreTableVbox.Show();
 		// don't wait, draw at the same time score table displayed
 		WaitDrawChar(_startGameLabel, 0.1f, StartGameText);
-		await WaitDrawChar(_mysteryPointsLabel, charDelay, MysteryPointsText);
-		await WaitDrawChar(_squidPointsLabel, charDelay, SquidPointsText);
-		await WaitDrawChar(_crabPointsLabel, charDelay, CrabPointsText);
-		await WaitDrawChar(_octopusPointsLabel, charDelay, OctopusPointsText);
+		await WaitDrawChar(_mysteryPointsLabel, CharDelay, MysteryPointsText);
+		await WaitDrawChar(_squidPointsLabel, CharDelay, SquidPointsText);
+		await WaitDrawChar(_crabPointsLabel, CharDelay, CrabPointsText);
+		await WaitDrawChar(_octopusPointsLabel, CharDelay, OctopusPointsText);
 	}
 
 	private async Task WaitDrawChar(Label label, float delay, string text)

@@ -1,9 +1,5 @@
 using Godot;
 
-/*
-* The singleton approach for Godot
-* This script still needs adding to the Global/AutoLoad
-*/
 public partial class SceneManager : Node
 {
 	public static SceneManager Instance {get; private set; }

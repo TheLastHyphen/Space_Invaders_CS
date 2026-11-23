@@ -2,6 +2,51 @@
 
 [ext_resource type="Script" uid="uid://bpdlsbqns42xp" path="res://Scenes/InvaderOctopus/InvaderOctopus.cs" id="1_d6b1k"]
 [ext_resource type="Texture2D" uid="uid://deu3nx516ewik" path="res://Scenes/InvaderOctopus/Octopus65x24.png" id="1_ilr1t"]
+[ext_resource type="Texture2D" uid="uid://jpa216tr2vqx" path="res://Assets/InvaderExplode/InvaderExplode-sheet.png" id="2_pmbo0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iy1u"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu8l4"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(16, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjm68"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(32, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vtn5"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(48, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_allsu"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(64, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hoge"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(80, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4233l"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(96, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuf4s"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(112, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tmep"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(128, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1oy84"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(144, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jm6q"]
+atlas = ExtResource("2_pmbo0")
+region = Rect2(160, 0, 15, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6b1k"]
 atlas = ExtResource("1_ilr1t")
@@ -15,13 +60,51 @@ region = Rect2(33, 0, 32, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0iy1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu8l4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjm68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vtn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_allsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hoge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4233l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuf4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tmep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1oy84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jm6q")
+}],
+"loop": 0,
+"name": &"Explode",
+"speed": 25.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_d6b1k")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pmbo0")
 }],
 "loop": 0,
-"name": &"default",
+"name": &"Move",
 "speed": 1.0
 }]
 
@@ -30,12 +113,16 @@ size = Vector2(32, 22)
 
 [node name="InvaderOctopus" type="Area2D" unique_id=633685619]
 collision_layer = 16
-collision_mask = 332
+collision_mask = 365
 script = ExtResource("1_d6b1k")
 BombDropChance = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1784979102]
 sprite_frames = SubResource("SpriteFrames_13qdw")
+animation = &"Explode"
+frame = 9
+frame_progress = 0.8284694
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=619612308]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_xrivr")

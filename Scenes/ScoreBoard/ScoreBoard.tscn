@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://t413gu1wtrap"]
+
+[ext_resource type="Script" uid="uid://b4ljni5m46bxk" path="res://Scenes/ScoreBoard/ScoreBoard.cs" id="1_f1mb1"]
+[ext_resource type="LabelSettings" uid="uid://c4iykfn6u75iv" path="res://Resources/ScoreLabel24.tres" id="1_jdv87"]
+
+[node name="ScoreBoard" type="CanvasLayer" unique_id=1867567555]
+script = ExtResource("1_f1mb1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1522056709]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_right = 72.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_constants/separation = 55
+
+[node name="ScoreVBox" type="VBoxContainer" parent="HBoxContainer" unique_id=1245803814]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="HBoxContainer/ScoreVBox" unique_id=848078751]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SCORE"
+label_settings = ExtResource("1_jdv87")
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/ScoreVBox" unique_id=1870228965]
+layout_mode = 2
+text = "000000"
+label_settings = ExtResource("1_jdv87")
+
+[node name="HighScoreVBox" type="VBoxContainer" parent="HBoxContainer" unique_id=975986498]
+layout_mode = 2
+
+[node name="HiScore" type="Label" parent="HBoxContainer/HighScoreVBox" unique_id=480831444]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "HIGH SCORE"
+label_settings = ExtResource("1_jdv87")
+
+[node name="HighScoreLabel" type="Label" parent="HBoxContainer/HighScoreVBox" unique_id=1734184390]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "000000"
+label_settings = ExtResource("1_jdv87")

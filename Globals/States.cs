@@ -1,10 +1,15 @@
-using System.Security.Cryptography.X509Certificates;
 using Godot;
 
 public partial class States : Node
 {
 	public static States Instance { get; private set; }
 
+	bool _debug = false;
+	public bool Debug
+	{
+		get => _debug;
+		set => _debug = value;
+	}
 
 	private bool _toggleMuteSound = false;
 	public bool IsSoundsMute => _toggleMuteSound;

@@ -7,7 +7,12 @@ public partial class LivesRemaining : Node2D
 	private Label _liveLabel;
 	private HBoxContainer _hBoxContainer;
 
+	[Signal]
+	public delegate void OnZeroLivesEventHandler();
+
 	private int _lives = 3;
+
+	[Export]
 	public int Lives
 	{
 		get => _lives;
@@ -89,13 +94,13 @@ public partial class LivesRemaining : Node2D
 		_hBoxContainer.RemoveChild(_hBoxContainer.GetChildren()[count -1 ]);
 	}
 
-	private void UpdateLives()
+	public void UpdateLives()
 	{
 		Lives -= 1;
 
 		if(Lives == 0)
 		{
-			SignalBroadCaster.Instance.EmitOnPlayerZeroLives();
+			EmitSignal(SignalName.OnZeroLives);
 		}
 		else if(Lives < 10)
 		{

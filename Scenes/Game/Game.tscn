@@ -5,7 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dqkbkwed158gi" path="res://Scenes/LivesRemaining/LivesRemaining.tscn" id="3_xbxml"]
 [ext_resource type="PackedScene" uid="uid://c55y8rx3b6tfm" path="res://Scenes/BunkerShield/BunkerShield.tscn" id="4_ln2h6"]
 [ext_resource type="PackedScene" uid="uid://c8wd1q5riud63" path="res://Scenes/Player/Player.tscn" id="5_y3kpf"]
-[ext_resource type="PackedScene" uid="uid://cugadacyx3vs6" path="res://Scenes/PlayerMissileExplode/PlayerMissileExplode.tscn" id="6_3k6gv"]
+[ext_resource type="Texture2D" uid="uid://l2qvb8hg4gwn" path="res://Assets/PlayerMissile/MissileExplode-sheet.png" id="7_gvja8"]
+[ext_resource type="AudioStream" uid="uid://055u1amacr0m" path="res://Assets/Audio/PlayerFire_alt.wav" id="7_m1o7v"]
+[ext_resource type="Texture2D" uid="uid://db5gqbtyfbkq8" path="res://Assets/Background/back.png" id="8_gvja8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xrivr"]
 
@@ -13,16 +15,136 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_b1lj4"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wi6ju"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7f2x3"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_njqwk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1o7v"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3586x"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10ki7"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti1oi"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edkrd"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsqcq"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf0ra"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg52j"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6581v"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hht6"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjp6r"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hno3"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88irt"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(192, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbp0e"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(208, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igouw"]
+atlas = ExtResource("7_gvja8")
+region = Rect2(224, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrivr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1o7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3586x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10ki7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti1oi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edkrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsqcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf0ra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fg52j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6581v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hht6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjp6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hno3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88irt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbp0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igouw")
+}],
+"loop": 0,
+"name": &"Explode",
+"speed": 35.0
+}]
 
 [node name="Game" type="Node2D" unique_id=2013797914]
 script = ExtResource("1_rdw05")
+MovementTimer = 0.1
+FloorLineStart = Vector2(0, 580)
+FloorLineEnd = Vector2(1152, 580)
 
 [node name="MoveTimer" type="Timer" parent="." unique_id=1958528283]
 
 [node name="FloorBoundary" type="Area2D" parent="." unique_id=582128255]
-position = Vector2(612, 589)
-collision_mask = 128
+position = Vector2(612, 576)
+collision_mask = 144
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorBoundary" unique_id=207449098]
 shape = SubResource("WorldBoundaryShape2D_xrivr")
@@ -44,6 +166,24 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1710958922]
 shape = SubResource("WorldBoundaryShape2D_b1lj4")
+
+[node name="LeftKillBoundary" type="Area2D" parent="." unique_id=905566447]
+position = Vector2(-100, 88)
+rotation = 1.5707964
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftKillBoundary" unique_id=610324489]
+shape = SubResource("WorldBoundaryShape2D_wi6ju")
+
+[node name="RightKillBoundary" type="Area2D" parent="." unique_id=2029025259]
+position = Vector2(1252, 88)
+collision_layer = 4096
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightKillBoundary" unique_id=171037266]
+rotation = 4.712389
+shape = SubResource("WorldBoundaryShape2D_7f2x3")
 
 [node name="RightBoundary" type="Area2D" parent="." unique_id=198194881]
 position = Vector2(1098, 0)
@@ -82,6 +222,7 @@ text = "0000"
 
 [node name="LivesRemaining" parent="." unique_id=95189323 instance=ExtResource("3_xbxml")]
 position = Vector2(30, 618)
+Lives = 5
 
 [node name="BunkerShield" parent="." unique_id=1763207096 instance=ExtResource("4_ln2h6")]
 position = Vector2(168, 432)
@@ -97,11 +238,39 @@ position = Vector2(936, 432)
 
 [node name="Player" parent="." unique_id=1507375035 instance=ExtResource("5_y3kpf")]
 position = Vector2(192, 558)
-IsInvinsible = true
+InvincibleTime = 1.5
+PlayerSpeed = 300.0
 
 [node name="Effects" type="Node" parent="." unique_id=1682296581]
 
-[node name="PlayerMissileExplode" parent="Effects" unique_id=474443416 instance=ExtResource("6_3k6gv")]
+[node name="PlayerMissileExplode" type="AnimatedSprite2D" parent="Effects" unique_id=1085900802]
+visible = false
+sprite_frames = SubResource("SpriteFrames_xrivr")
+animation = &"Explode"
+
+[node name="PlayerMissileSound" type="AudioStreamPlayer2D" parent="Effects" unique_id=256750385]
+visible = false
+stream = ExtResource("7_m1o7v")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1533878972]
+z_index = -1
+repeat_size = Vector2(0, 1152)
+autoscroll = Vector2(0, -100)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=2023753013]
+position = Vector2(-208, -224)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("8_gvja8")
+centered = false
+
+[node name="MotherShipTimer" type="Timer" parent="." unique_id=38558058]
+wait_time = 25.0
+
+[node name="MotherShipRightStart" type="Marker2D" parent="." unique_id=1097575918]
+position = Vector2(1212, 88)
+
+[node name="MotherShipLeftStart" type="Marker2D" parent="." unique_id=608395395]
+position = Vector2(-60, 88)
 
 [connection signal="area_entered" from="LeftBoundary" to="." method="OnLeftBoundary_AreaEntered"]
 [connection signal="area_entered" from="RightBoundary" to="." method="OnRightBoundary_AreaEntered"]

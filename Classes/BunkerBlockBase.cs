@@ -12,9 +12,8 @@ public partial class BunkerBlockBase : Area2D
 	{
 		base._ExitTree();
 		SignalBroadCaster.Instance.OnInvaderBombHit -= OnInvaderBombHit;
-		//SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
+		SignalBroadCaster.Instance.OnInvaderHit -= OnInvaderHit;
 	}
-
 
 	public override void _Ready()
 	{
@@ -31,11 +30,10 @@ public partial class BunkerBlockBase : Area2D
 		}
 
 		AreaEntered += OnInvaderBombHit;
-		//SignalBroadCaster.Instance.OnInvaderHit += OnInvaderHit;
-		//SignalBroadCaster.Instance.OnInvaderBombHit += OnInvaderBombHit;
+		SignalBroadCaster.Instance.OnInvaderHit += OnInvaderHit;
 	}
 
-	public void SetPixelRandomly()
+	private void SetPixelRandomly()
 	{
 		Image image = _block.Texture.GetImage();
 
@@ -55,7 +53,6 @@ public partial class BunkerBlockBase : Area2D
 		{
 			_pixels.Remove(p);
 			Color c = image.GetPixel(p.PixelRow, p.PixelColumn);
-			//GD.Print(c);
 
 			image.SetPixel(p.PixelRow, p.PixelColumn, Colors.Transparent);
 			_block.Texture = ImageTexture.CreateFromImage(image);
@@ -65,21 +62,14 @@ public partial class BunkerBlockBase : Area2D
 		if(_devideBy == 0) _devideBy = 1;		
 	}
 
-	// public void OnAreaEntered(Area2D area)
-	// {
-	// 	SetPixelRandomly();
-	// 	if(_pixels.Count == 0) QueueFree();
-	// }
-
 	private void OnInvaderBombHit(Area2D area)
 	{
 		SetPixelRandomly();		
 		if(_pixels.Count == 0) QueueFree();
 	}
 
-	// private void OnInvaderHit(GodotObject godotObject)
-	// {
-	// 	if(godotObject.GetType() == typeof(InvaderBase) == true) QueueFree();
-	// 	//GD.Print("GO type = ", godotObject.GetType());
-	// }
+	private void OnInvaderHit(Area2D area)
+	{
+		area.QueueFree();
+	}
 }

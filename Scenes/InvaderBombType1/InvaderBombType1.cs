@@ -3,6 +3,6 @@ using System;
 
 public partial class InvaderBombType1 : InvaderBombBase
 {
-	public override uint Points => 2;
+	protected override uint Points => 2;
 
 }

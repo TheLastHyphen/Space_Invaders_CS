@@ -2,6 +2,51 @@
 
 [ext_resource type="Texture2D" uid="uid://bjkv6ymnpjlmp" path="res://Scenes/InvaderSquid/Squid65x24.png" id="1_8b5vt"]
 [ext_resource type="Script" uid="uid://ilhm5ynopocs" path="res://Scenes/InvaderSquid/InvaderSquid.cs" id="1_lbdod"]
+[ext_resource type="Texture2D" uid="uid://jpa216tr2vqx" path="res://Assets/InvaderExplode/InvaderExplode-sheet.png" id="2_8f4ai"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0km4i"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(0, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob2yj"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(16, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3tdg"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(32, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4wh5"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(48, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gv4k"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(64, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c15j0"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(80, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oflt4"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(96, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_780q6"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(112, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5wl6"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(128, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tdfv"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(144, 0, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c10gb"]
+atlas = ExtResource("2_8f4ai")
+region = Rect2(160, 0, 15, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lbdod"]
 atlas = ExtResource("1_8b5vt")
@@ -15,13 +60,51 @@ region = Rect2(27, 0, 26, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0km4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ob2yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3tdg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4wh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gv4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c15j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oflt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_780q6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5wl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tdfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c10gb")
+}],
+"loop": 0,
+"name": &"Explode",
+"speed": 25.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lbdod")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8f4ai")
 }],
 "loop": 0,
-"name": &"default",
+"name": &"Move",
 "speed": 1.0
 }]
 
@@ -30,12 +113,14 @@ size = Vector2(26, 22)
 
 [node name="InvaderSquid" type="Area2D" unique_id=1657113657]
 collision_layer = 16
-collision_mask = 332
+collision_mask = 365
 script = ExtResource("1_lbdod")
 BombDropChance = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1743958503]
 sprite_frames = SubResource("SpriteFrames_13qdw")
+animation = &"Move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=428018341]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_xrivr")

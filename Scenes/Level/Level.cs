@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Data.SqlTypes;
 using System.Threading.Tasks;
 
 public enum InvaderName
@@ -12,17 +10,31 @@ public enum InvaderName
 
 public partial class Level : Node2D
 {
+	[Signal]
+	public delegate void OnIncrementInvaderEventHandler(int number);
+
 	private InvaderSquid _squid;
 
 	[Export]
-	int InvadersInRow { get; set; } = 200;
-	const float InvaderXSpacing = 50.0f;
-	const float InvaderYSpacing = 50.0f;
-	private Vector2 row1StartPosition => new(33,90);
-	private Vector2 row2StartPosition => new(33,120);
-	private Vector2 row3StartPosition => new(33,150);
-	private Vector2 row4StartPosition => new(33,180);
-	private Vector2 row5StartPosition => new(33,210);
+	public int InvadersInRow { get; set; } = 20;
+
+	[Export]
+	public float StartPositionX { get; set; } = 70; //33
+
+	[Export]
+	public float StartPositionY { get; set; } = 90;
+
+	[Export]
+	public float ColSpacing { get; set; } = 50;
+
+	[Export]
+	public float RowSpacing { get; set; } = 30;
+
+	private Vector2 Row1StartPosition => new(StartPositionX, StartPositionY);
+	private Vector2 Row2StartPosition => new(StartPositionX, StartPositionY + RowSpacing);
+	private Vector2 Row3StartPosition => new(StartPositionX, StartPositionY + RowSpacing * 2);
+	private Vector2 Row4StartPosition => new(StartPositionX, StartPositionY + RowSpacing * 3);
+	private Vector2 Row5StartPosition => new(StartPositionX, StartPositionY + RowSpacing * 4);
 
 	private int _totalInvaders = 0;
 
@@ -34,12 +46,13 @@ public partial class Level : Node2D
 
 	public async Task SetupInvaders()
 	{
+		base._Ready();
 		_totalInvaders = 0;
-		await SetUpRow(PackedScenes.Instance.InvaderSquid, row1StartPosition, Colors.White);
-		await SetUpRow(PackedScenes.Instance.InvaderCrab, row2StartPosition, Colors.White);
-		await SetUpRow(PackedScenes.Instance.InvaderCrab, row3StartPosition, Colors.White);
-		await SetUpRow(PackedScenes.Instance.InvaderOctopus, row4StartPosition, Colors.White);
-		await SetUpRow(PackedScenes.Instance.InvaderOctopus, row5StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderSquid, Row1StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderCrab, Row2StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderCrab, Row3StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderOctopus, Row4StartPosition, Colors.White);
+		await SetUpRow(PackedScenes.Instance.InvaderOctopus, Row5StartPosition, Colors.White);
 		SignalBroadCaster.Instance.EmitOnFinishedDrawingInvaders();
 	}
 
@@ -48,10 +61,10 @@ public partial class Level : Node2D
 		for(int i = 0; i < InvadersInRow; i++)
 		{
 			InvaderBase invader = b.Instantiate<InvaderBase>();
-			invader.Position = new Vector2(rowStart.X + (InvaderXSpacing * i), rowStart.Y);
-			invader.InvAnimatedSprite.Modulate = color;
 			AddChild(invader);
-			SignalBroadCaster.Instance.OnUpdateNumberOfInvaders(++_totalInvaders);
+			invader.Position = new Vector2(rowStart.X + (ColSpacing * i), rowStart.Y);
+			invader.InvAnimatedSprite.Modulate = color;
+			EmitSignal("OnIncrementInvader", ++_totalInvaders);
 			await WaitDrawInvader();
 		}
 	}

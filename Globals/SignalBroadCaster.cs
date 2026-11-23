@@ -6,20 +6,33 @@ public partial class SignalBroadCaster : Node
 	public static SignalBroadCaster Instance { get; private set; }
 
 	public Action OnMoveTimerTimeOut;
+	public Action OnMoveInvader;
 	public Action OnFinishedDrawingInvaders;
-	public Action<int> OnUpdateNumberOfInvaders;
+	//public Action<int> OnUpdateNumberOfInvaders;
 	public Action OnEdgeOfScreen;
 	public Action OnCanFireMissile;
-	public Action OnInvaderHit;
+	public Action<Area2D> OnInvaderHit;
+	public Action OnInvaderKilled;
+	public Action OnInvaderHitFloor;
 	public Action OnPlayerHit;
-	public Action OnPlayerZeroLives;
 	public Action<Area2D> OnInvaderBombHit;
 	public Action<Vector2, String> OnPlayerMissileHit;
 	public Action OnExtraLife;
+	public Action<uint> OnPointScored;
 
 	public override void _Ready()
 	{
 		Instance = this;
+	}
+
+	public void EmitOnMoveInvader()
+	{
+		OnMoveInvader?.Invoke();
+	}
+
+	public void EmitOnPointScored(uint points)
+	{
+		OnPointScored?.Invoke(points);
 	}
 
 	public void EmitOnMoveTimerTimeOut()
@@ -32,11 +45,6 @@ public partial class SignalBroadCaster : Node
 		OnFinishedDrawingInvaders?.Invoke();
 	}
 
-	public void EmitOnUpdateNumberOfInvaders(int number)
-	{
-		OnUpdateNumberOfInvaders?.Invoke(number);
-	}
-
 	public void EmitOnEdgeOfScreen()
 	{
 		OnEdgeOfScreen?.Invoke();
@@ -47,19 +55,14 @@ public partial class SignalBroadCaster : Node
 		OnCanFireMissile?.Invoke();
 	}
 
-	public void EmitOnInvaderHit()
+	public void EmitOnInvaderHit(Area2D area)
 	{
-		OnInvaderHit?.Invoke();
+		OnInvaderHit?.Invoke(area);
 	}
 
 	public void EmitOnPlayerHit()
 	{
 		OnPlayerHit?.Invoke();
-	}
-
-	public void EmitOnPlayerZeroLives()
-	{
-		OnPlayerZeroLives?.Invoke();
 	}
 
 	public void EmitOnInvaderBombHit(Area2D area)
@@ -75,5 +78,15 @@ public partial class SignalBroadCaster : Node
 	public void EmitOnExtraLife()
 	{
 		OnExtraLife?.Invoke();
+	}
+
+	public void EmitOnInvaderKilled()
+	{
+		OnInvaderKilled?.Invoke();
+	}
+
+	public void EmitOnInvaderHitFloor()
+	{
+		OnInvaderHitFloor?.Invoke();
 	}
 }
